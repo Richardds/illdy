@@ -34,39 +34,39 @@ if ( ! defined( 'WPINC' ) ) {
 
 	?>
 
-	<form method="post" action="options.php">
+    <form method="post" action="options.php">
 		<?php settings_fields( $this->theme_slug . '-license' ); ?>
 
-		<table class="form-table">
-			<tbody>
-			<tr valign="top">
-				<th valign="top">
+        <table class="form-table">
+            <tbody>
+            <tr valign="top">
+                <th valign="top">
 					<?php echo esc_html( $strings['license-key'] ); ?>
-				</th>
-				<td>
-					<input id="<?php echo esc_attr( $this->theme_slug ); ?>_license_key" name="<?php echo esc_attr( $this->theme_slug ); ?>_license_key" class="regular-text" value="<?php echo esc_attr( $license ); ?>"/>
-					<p class="description">
+                </th>
+                <td>
+                    <input id="<?php echo esc_attr( $this->theme_slug ); ?>_license_key" name="<?php echo esc_attr( $this->theme_slug ); ?>_license_key" class="regular-text" value="<?php echo esc_attr( $license ); ?>"/>
+                    <p class="description">
 						<?php echo esc_html( $message ); ?>
-					</p>
-				</td>
-			</tr>
+                    </p>
+                </td>
+            </tr>
 
 			<?php if ( $license ) { ?>
-				<tr valign="top">
-					<th valign="top">
+                <tr valign="top">
+                    <th valign="top">
 						<?php echo esc_html( $strings['license-action'] ); ?>
-					</th>
-					<td>
+                    </th>
+                    <td>
 						<?php
 						wp_nonce_field( $this->theme_slug . '_nonce', $this->theme_slug . '_nonce' );
 						?>
-						<input type="submit" class="button-secondary" name="<?php echo esc_attr( $this->theme_slug ); ?> <?php echo 'valid' === $status ? '_license_deactivate' : 'license_activate'; ?>" value="<?php echo 'valid' === $status ? esc_attr( $strings['deactivate-license'] ) : esc_attr( $strings['activate-license'] ); ?>"/>
-					</td>
-				</tr>
+                        <input type="submit" class="button-secondary" name="<?php echo esc_attr( $this->theme_slug ); ?> <?php echo 'valid' === $status ? '_license_deactivate' : 'license_activate'; ?>" value="<?php echo 'valid' === $status ? esc_attr( $strings['deactivate-license'] ) : esc_attr( $strings['activate-license'] ); ?>"/>
+                    </td>
+                </tr>
 			<?php } ?>
 
-			</tbody>
-		</table>
+            </tbody>
+        </table>
 		<?php submit_button(); ?>
-	</form>
+    </form>
 </div>

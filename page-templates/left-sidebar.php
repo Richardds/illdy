@@ -4,16 +4,16 @@
  *
  *  The template for displaying Custom Page Template: Left Sidebar.
  *
- *  @package WordPress
- *  @subpackage illdy
+ * @package WordPress
+ * @subpackage illdy
  */
 ?>
 <?php get_header(); ?>
 <div class="container">
-	<div class="row">
+    <div class="row">
 		<?php get_sidebar(); ?>
-		<div class="col-sm-7">
-			<section id="blog">
+        <div class="col-sm-7">
+            <section id="blog">
 				<?php
 				if ( have_posts() ) :
 					while ( have_posts() ) :
@@ -22,8 +22,8 @@
 					endwhile;
 				endif;
 				?>
-			</section><!--/#blog-->
-		</div><!--/.col-sm-7-->
-	</div><!--/.row-->
+            </section><!--/#blog-->
+        </div><!--/.col-sm-7-->
+    </div><!--/.row-->
 </div><!--/.container-->
 <?php get_footer(); ?>

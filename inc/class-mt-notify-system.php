@@ -4,8 +4,7 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 	/**
 	 * Class MT_Notify_System
 	 */
-	class MT_Notify_System {
-
+	class MT_Notify_System{
 		public static function get_plugins( $plugin_folder = '' ) {
 			if ( ! function_exists( 'get_plugins' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -59,9 +58,9 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 		 * @return bool
 		 */
 		public static function illdy_has_posts() {
-			$args  = array(
+			$args  = [
 				's' => 'Gary Johns: \'What is Aleppo\'',
-			);
+			];
 			$query = get_posts( $args );
 
 			if ( ! empty( $query ) ) {
@@ -75,10 +74,10 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 		 * @return bool
 		 */
 		public static function has_content() {
-			$check = array(
+			$check = [
 				'widgets' => self::has_widgets(),
 				'posts'   => self::illdy_has_posts(),
-			);
+			];
 
 			if ( $check['widgets'] && $check['posts'] ) {
 				return true;
@@ -130,10 +129,10 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 			if ( $return ) {
 				return true;
 			}
-			$check = array(
+			$check = [
 				'installed' => self::check_plugin_is_installed( $slug ),
 				'active'    => self::check_plugin_is_active( $slug ),
-			);
+			];
 
 			if ( ! $check['installed'] || ! $check['active'] ) {
 				return false;
@@ -157,36 +156,34 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 			}
 
 			return true;
-
 		}
 
 		public static function check_plugin_update( $slug ) {
 
-			$check = array(
+			$check = [
 				'installed' => self::check_plugin_is_installed( $slug ),
 				'active'    => self::check_plugin_is_active( $slug ),
 				'update'    => self::check_plugin_need_update( $slug ),
-			);
+			];
 
 			if ( ! $check['installed'] || ! $check['active'] || ! $check['update'] ) {
 				return false;
 			}
 
 			return true;
-
 		}
 
 		public static function has_import_plugins() {
-			$check = array(
-				'wordpress-importer'       => array(
+			$check = [
+				'wordpress-importer'       => [
 					'installed' => false,
-					'active' => false,
-				),
-				'widget-importer-exporter' => array(
+					'active'    => false,
+				],
+				'widget-importer-exporter' => [
 					'installed' => false,
-					'active' => false,
-				),
-			);
+					'active'    => false,
+				],
+			];
 
 			$content = self::has_content();
 			$return  = false;
@@ -269,7 +266,6 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 			}
 
 			return __( 'Please install the WordPress widget importer to create the demo content', 'illdy' );
-
 		}
 
 		public static function create_plugin_requirement_title( $install_text, $activate_text, $plugin_slug ) {
@@ -280,9 +276,9 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 			if ( '' == $install_text && '' == $activate_text ) {
 				return;
 			}
-			if ( '' == $install_text &  '' != $activate_text ) {
+			if ( '' == $install_text & '' != $activate_text ) {
 				$install_text = $activate_text;
-			} elseif ( '' == $activate_text &&  '' != $install_text ) {
+			} elseif ( '' == $activate_text && '' != $install_text ) {
 				$activate_text = $install_text;
 			}
 
@@ -294,7 +290,6 @@ if ( ! class_exists( 'MT_Notify_System' ) ) {
 			} else {
 				return '';
 			}
-
 		}
 
 		public static function create_plugin_title( $plugin_title, $plugin_slug ) {

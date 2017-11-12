@@ -99,7 +99,7 @@ module.exports = function(grunt){
                     {
                         expand: true,     // Enable dynamic expansion.
                         cwd: 'layout/js/',      // Src matches are relative to this path.
-                        src: ['**/*.js', '!jquery.fancybox.js'], // Actual pattern(s) to match.
+                        src: ['**/*.js', '!jquery.fancybox.min.js'], // Actual pattern(s) to match.
                         dest: 'layout/js/',   // Destination path prefix.
                         ext: '.min.js',   // Dest filepaths will have this extension.
                         extDot: 'first'   // Extensions in filenames begin after the first dot

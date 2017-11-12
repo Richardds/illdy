@@ -13,7 +13,13 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Class Epsilon_Updater_Class
  */
-class Epsilon_Updater_Class {
+class Epsilon_Updater_Class{
+	/**
+	 * Array of language strings
+	 *
+	 * @var array
+	 */
+	protected $strings = [];
 	/**
 	 * Remote API URL, from where to retrieve info about the product
 	 *
@@ -62,30 +68,24 @@ class Epsilon_Updater_Class {
 	 * @var string
 	 */
 	private $author;
-	/**
-	 * Array of language strings
-	 *
-	 * @var array
-	 */
-	protected $strings = array();
 
 	/**
 	 * Epsilon_Updater_Class constructor.
 	 *
 	 * @param array $args
 	 */
-	public function __construct( $args = array() ) {
+	public function __construct( $args = [] ) {
 		$theme = wp_get_theme();
 
-		$defaults = array(
+		$defaults = [
 			'remote_api_url' => $theme->get( 'AuthorURI' ),
-			'request_data'   => array(),
+			'request_data'   => [],
 			'theme_slug'     => $theme->get( 'TextDomain' ),
 			'item_name'      => $theme->get( 'Name' ),
 			'license'        => '',
 			'version'        => $theme->get( 'Version' ),
 			'author'         => $theme->get( 'Author' ),
-		);
+		];
 
 		$args = wp_parse_args( $args, $defaults );
 
@@ -99,11 +99,27 @@ class Epsilon_Updater_Class {
 		$this->response_key   = $this->theme_slug . '-update-response';
 		$this->strings        = EDD_Theme_Helper::get_strings();
 
-		add_filter( 'site_transient_update_themes', array( $this, 'product_update_transient' ) );
-		add_filter( 'delete_site_transient_update_themes', array( $this, 'delete_product_update_transient' ) );
-		add_action( 'load-update-core.php', array( $this, 'delete_product_update_transient' ) );
-		add_action( 'load-themes.php', array( $this, 'delete_theme_update_transient' ) );
-		add_action( 'load-themes.php', array( $this, 'load_themes_screen' ) );
+		add_filter( 'site_transient_update_themes', [ $this, 'product_update_transient' ] );
+		add_filter( 'delete_site_transient_update_themes', [ $this, 'delete_product_update_transient' ] );
+		add_action( 'load-update-core.php', [ $this, 'delete_product_update_transient' ] );
+		add_action( 'load-themes.php', [ $this, 'delete_theme_update_transient' ] );
+		add_action( 'load-themes.php', [ $this, 'load_themes_screen' ] );
+	}
+
+	/**
+	 * Update product transient
+	 *
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public function product_update_transient( $value ) {
+		$update_data = $this->check_for_update();
+		if ( $update_data ) {
+			$value->response[ $this->theme_slug ] = $update_data;
+		}
+
+		return $value;
 	}
 
 	/**
@@ -116,18 +132,18 @@ class Epsilon_Updater_Class {
 		if ( false === $update_data ) {
 			$failed = false;
 
-			$api_params = array(
+			$api_params = [
 				'edd_action' => 'get_version',
 				'license'    => $this->license,
 				'name'       => $this->item_name,
 				'slug'       => $this->theme_slug,
 				'author'     => $this->author,
-			);
+			];
 
-			$response = wp_remote_post( $this->remote_api_url, array(
+			$response = wp_remote_post( $this->remote_api_url, [
 				'timeout' => 30,
 				'body'    => $api_params,
-			) );
+			] );
 
 			// Make sure the response was successful.
 			if ( is_wp_error( $response ) || 200 != wp_remote_retrieve_response_code( $response ) ) {
@@ -164,22 +180,6 @@ class Epsilon_Updater_Class {
 	}
 
 	/**
-	 * Update product transient
-	 *
-	 * @param $value
-	 *
-	 * @return mixed
-	 */
-	public function product_update_transient( $value ) {
-		$update_data = $this->check_for_update();
-		if ( $update_data ) {
-			$value->response[ $this->theme_slug ] = $update_data;
-		}
-
-		return $value;
-	}
-
-	/**
 	 * Delete product transient
 	 */
 	public function delete_product_update_transient() {
@@ -191,7 +191,7 @@ class Epsilon_Updater_Class {
 	 */
 	public function load_themes_screen() {
 		add_thickbox();
-		add_action( 'admin_notices', array( $this, 'update_nag' ) );
+		add_action( 'admin_notices', [ $this, 'update_nag' ] );
 	}
 
 	/**
@@ -212,15 +212,7 @@ class Epsilon_Updater_Class {
 		if ( version_compare( $this->version, $api_response->new_version, '<' ) ) {
 
 			echo '<div id="update-nag">';
-			printf(
-				$this->strings['update-available'],
-				$theme->display( 'Name', false ),
-				$api_response->new_version,
-				'#TB_inline?width=640&amp;inlineId=' . esc_attr( $this->theme_slug ) . '_changelog',
-				$theme->display( 'Name', false ),
-				$update_url,
-				$update_onclick
-			);
+			printf( $this->strings['update-available'], $theme->display( 'Name', false ), $api_response->new_version, '#TB_inline?width=640&amp;inlineId=' . esc_attr( $this->theme_slug ) . '_changelog', $theme->display( 'Name', false ), $update_url, $update_onclick );
 			echo '</div>';
 			echo '<div id="' . esc_attr( $this->theme_slug ) . '_changelog" style="display:none;">';
 			echo wpautop( $api_response->sections['changelog'] );

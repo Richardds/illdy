@@ -15,6 +15,7 @@ if ( ! function_exists( 'illdy_body_classes' ) ) {
 		if ( ! is_singular() ) {
 			$classes[] = 'hfeed';
 		}
+
 		return $classes;
 	}
 }
@@ -28,46 +29,44 @@ if ( ! function_exists( 'illdy_comment' ) ) {
 		switch ( $comment->comment_type ) :
 			case 'pingback' :
 			case 'trackback' :
-		?>
-		<li class="post pingback">
-			<p><?php _e( 'Pingback:', 'illdy' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'illdy' ), ' ' ); ?></p>
-		<?php
+				?>
+                <li class="post pingback">
+                <p><?php _e( 'Pingback:', 'illdy' ); ?><?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'illdy' ), ' ' ); ?></p>
+				<?php
 				break;
 			default :
-		?>
-		<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-			<div id="comment-<?php comment_ID(); ?>">
-				<div class="row">
-					<div class="col-sm-2 clearfix">
-						<div class="comment-gravatar">
-							<?php echo get_avatar( $comment, 84 ); ?>
-						</div><!--/.comment-gravatar-->
-					</div><!--/.col-sm-2-->
-					<div class="col-sm-10">
-						<?php printf( '%s', get_comment_author_link() ); ?>
-						<time class="comment-time" datetime="<?php printf( '%s-%s-%s', get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'd' ) ); ?>"><?php printf( __( '%1$s at %2$s', 'illdy' ), get_comment_date(), get_comment_time() ); ?></time>
-						<div class="comment-entry markup-format">
-							<?php comment_text(); ?>
+				?>
+                <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+                <div id="comment-<?php comment_ID(); ?>">
+                    <div class="row">
+                        <div class="col-sm-2 clearfix">
+                            <div class="comment-gravatar">
+								<?php echo get_avatar( $comment, 84 ); ?>
+                            </div><!--/.comment-gravatar-->
+                        </div><!--/.col-sm-2-->
+                        <div class="col-sm-10">
+							<?php printf( '%s', get_comment_author_link() ); ?>
+                            <time class="comment-time" datetime="<?php printf( '%s-%s-%s', get_the_date( 'Y' ), get_the_date( 'm' ), get_the_date( 'd' ) ); ?>"><?php printf( __( '%1$s at %2$s', 'illdy' ), get_comment_date(), get_comment_time() ); ?></time>
+                            <div class="comment-entry markup-format">
+								<?php comment_text(); ?><?php
+								if ( '0' == $comment->comment_approved ) :
+									_e( 'Your comment is awaiting moderation.', 'illdy' );
+								endif;
+								?>
+                            </div><!--/.comment-entry.markup-format-->
 							<?php
-							if ( '0' == $comment->comment_approved ) :
-								_e( 'Your comment is awaiting moderation.', 'illdy' );
-							endif;
-							?>
-						</div><!--/.comment-entry.markup-format-->
-						<?php
-						comment_reply_link( array_merge( $args, array(
-							'depth' => $depth,
-							'max_depth' => $args['max_depth'],
-						) ) ); ?>
-					</div><!--/.col-sm-10-->
-				</div><!--/.row-->
-			</div><!--/#comment-<?php comment_ID(); ?>.row-->
-		<?php
+							comment_reply_link( array_merge( $args, [
+								'depth'     => $depth,
+								'max_depth' => $args['max_depth'],
+							] ) ); ?>
+                        </div><!--/.col-sm-10-->
+                    </div><!--/.row-->
+                </div><!--/#comment-<?php comment_ID(); ?>.row-->
+				<?php
 				break;
 		endswitch;
 	}
 }// End if().
-
 
 /**
  *  Move comment field to bottom
@@ -78,10 +77,10 @@ if ( ! function_exists( 'illdy_move_comment_field_to_bottom' ) ) {
 		$comment_field = $fields['comment'];
 		unset( $fields['comment'] );
 		$fields['comment'] = $comment_field;
+
 		return $fields;
 	}
 }
-
 
 /**
  *  Get image ID from Image URL
@@ -103,41 +102,40 @@ if ( ! function_exists( 'illdy_get_image_id_from_image_url' ) ) {
 if ( ! function_exists( 'illdy_sections_show' ) ) {
 	function illdy_sections_order( $section ) {
 
-		$controls = array(
-			'illdy_panel_about' => 'illdy_about_general_show',
-			'illdy_panel_projects' => 'illdy_projects_general_show',
+		$controls = [
+			'illdy_panel_about'          => 'illdy_about_general_show',
+			'illdy_panel_projects'       => 'illdy_projects_general_show',
 			'illdy_testimonials_general' => 'illdy_testimonials_general_show',
-			'illdy_panel_services' => 'illdy_services_general_show',
-			'illdy_latest_news_general' => 'illdy_latest_news_general_show',
-			'illdy_counter_general' => 'illdy_counter_general_show',
-			'illdy_panel_team' => 'illdy_team_general_show',
-			'illdy_contact_us' => 'illdy_contact_us_show',
-			'illdy_full_width' => 'illdy_full_width_general_show',
-		);
+			'illdy_panel_services'       => 'illdy_services_general_show',
+			'illdy_latest_news_general'  => 'illdy_latest_news_general_show',
+			'illdy_counter_general'      => 'illdy_counter_general_show',
+			'illdy_panel_team'           => 'illdy_team_general_show',
+			'illdy_contact_us'           => 'illdy_contact_us_show',
+			'illdy_full_width'           => 'illdy_full_width_general_show',
+		];
 
-		if ( array_key_exists( $section , $controls ) ) {
+		if ( array_key_exists( $section, $controls ) ) {
 			return get_theme_mod( $controls[ $section ], 1 );
 		} else {
 			return true;
 		}
-
 	}
 }
 
 if ( ! function_exists( 'illdy_sections' ) ) {
 	function illdy_sections() {
 
-		$templates = array(
-			'illdy_panel_about' => 'about',
-			'illdy_panel_projects' => 'projects',
+		$templates = [
+			'illdy_panel_about'          => 'about',
+			'illdy_panel_projects'       => 'projects',
 			'illdy_testimonials_general' => 'testimonials-widget',
-			'illdy_panel_services' => 'services',
-			'illdy_latest_news_general' => 'latest-news',
-			'illdy_counter_general' => 'counter',
-			'illdy_panel_team' => 'team',
-			'illdy_contact_us' => 'contact-us',
-			'illdy_full_width' => 'full-width',
-		);
+			'illdy_panel_services'       => 'services',
+			'illdy_latest_news_general'  => 'latest-news',
+			'illdy_counter_general'      => 'counter',
+			'illdy_panel_team'           => 'team',
+			'illdy_contact_us'           => 'contact-us',
+			'illdy_full_width'           => 'full-width',
+		];
 
 		$sections = illdy_get_sections_position();
 
@@ -146,38 +144,37 @@ if ( ! function_exists( 'illdy_sections' ) ) {
 				get_template_part( 'sections/front-page', $templates[ $s_id ] );
 			}
 		}
-
 	}
 }
 
 function illdy_hex2rgb( $hex_color, $opacity = 1 ) {
 	$shorthand = ( strlen( $hex_color ) == 4 );
 
-	list( $r, $g, $b ) = $shorthand? sscanf( $hex_color, '#%1s%1s%1s' ) : sscanf( $hex_color, '#%2s%2s%2s' );
+	list( $r, $g, $b ) = $shorthand ? sscanf( $hex_color, '#%1s%1s%1s' ) : sscanf( $hex_color, '#%2s%2s%2s' );
 
-	return 'rgba( ' . hexdec( $shorthand? "$r$r" : $r ) . ', ' . hexdec( $shorthand? "$g$g" : $g ) . ', ' . hexdec( $shorthand? "$b$b" : $b ) . ', ' . $opacity . ' )';
+	return 'rgba( ' . hexdec( $shorthand ? "$r$r" : $r ) . ', ' . hexdec( $shorthand ? "$g$g" : $g ) . ', ' . hexdec( $shorthand ? "$b$b" : $b ) . ', ' . $opacity . ' )';
 }
 
 if ( ! function_exists( 'illdy_jumbotron_css' ) ) {
 	function illdy_jumbotron_css() {
 
-		$illdy_jumbotron_general_image = get_theme_mod( 'illdy_jumbotron_general_image', esc_url( get_template_directory_uri() . '/layout/images/front-page/front-page-header.jpg' ) );
-		$illdy_jumbotron_background_size = get_theme_mod( 'illdy_jumbotron_background_size' );
-		$illdy_jumbotron_background_position_y = get_theme_mod( 'illdy_jumbotron_background_position_y' );
-		$illdy_jumbotron_background_position_x = get_theme_mod( 'illdy_jumbotron_background_position_x' );
-		$illdy_jumbotron_background_repeat = get_theme_mod( 'illdy_jumbotron_background_repeat' );
-		$illdy_jumbotron_background_attachment = get_theme_mod( 'illdy_jumbotron_background_attachment' );
-		$illdy_jumbotron_general_color = get_theme_mod( 'illdy_jumbotron_general_color' );
-		$illdy_jumbotron_first_border_color = get_theme_mod( 'illdy_jumbotron_first_button_background' );
-		$illdy_jumbotron_first_button_background = illdy_hex2rgb( $illdy_jumbotron_first_border_color, '.2' );
-		$illdy_jumbotron_first_button_background_hover = illdy_hex2rgb( $illdy_jumbotron_first_border_color, '.1' );
-		$illdy_jumbotron_second_button_background = get_theme_mod( 'illdy_jumbotron_second_button_background' );
+		$illdy_jumbotron_general_image                  = get_theme_mod( 'illdy_jumbotron_general_image', esc_url( get_template_directory_uri() . '/layout/images/front-page/front-page-header.jpg' ) );
+		$illdy_jumbotron_background_size                = get_theme_mod( 'illdy_jumbotron_background_size' );
+		$illdy_jumbotron_background_position_y          = get_theme_mod( 'illdy_jumbotron_background_position_y' );
+		$illdy_jumbotron_background_position_x          = get_theme_mod( 'illdy_jumbotron_background_position_x' );
+		$illdy_jumbotron_background_repeat              = get_theme_mod( 'illdy_jumbotron_background_repeat' );
+		$illdy_jumbotron_background_attachment          = get_theme_mod( 'illdy_jumbotron_background_attachment' );
+		$illdy_jumbotron_general_color                  = get_theme_mod( 'illdy_jumbotron_general_color' );
+		$illdy_jumbotron_first_border_color             = get_theme_mod( 'illdy_jumbotron_first_button_background' );
+		$illdy_jumbotron_first_button_background        = illdy_hex2rgb( $illdy_jumbotron_first_border_color, '.2' );
+		$illdy_jumbotron_first_button_background_hover  = illdy_hex2rgb( $illdy_jumbotron_first_border_color, '.1' );
+		$illdy_jumbotron_second_button_background       = get_theme_mod( 'illdy_jumbotron_second_button_background' );
 		$illdy_jumbotron_second_button_background_hover = get_theme_mod( 'illdy_jumbotron_second_button_background_hover' );
-		$illdy_jumbotron_title_color = get_theme_mod( 'illdy_jumbotron_title_color' );
-		$illdy_jumbotron_points_color = get_theme_mod( 'illdy_jumbotron_points_color' );
-		$illdy_jumbotron_descriptions_color = get_theme_mod( 'illdy_jumbotron_descriptions_color' );
-		$illdy_jumbotron_first_button_color = get_theme_mod( 'illdy_jumbotron_first_button_color' );
-		$illdy_jumbotron_right_button_color = get_theme_mod( 'illdy_jumbotron_right_button_color' );
+		$illdy_jumbotron_title_color                    = get_theme_mod( 'illdy_jumbotron_title_color' );
+		$illdy_jumbotron_points_color                   = get_theme_mod( 'illdy_jumbotron_points_color' );
+		$illdy_jumbotron_descriptions_color             = get_theme_mod( 'illdy_jumbotron_descriptions_color' );
+		$illdy_jumbotron_first_button_color             = get_theme_mod( 'illdy_jumbotron_first_button_color' );
+		$illdy_jumbotron_right_button_color             = get_theme_mod( 'illdy_jumbotron_right_button_color' );
 
 		$css = '';
 		if ( $illdy_jumbotron_general_image ) {
@@ -241,24 +238,24 @@ if ( ! function_exists( 'illdy_jumbotron_css' ) ) {
 if ( ! function_exists( 'illdy_latestnews_css' ) ) {
 	function illdy_latestnews_css() {
 
-		$illdy_latest_news_title_color = get_theme_mod( 'illdy_latest_news_title_color' );
-		$illdy_latest_news_descriptions_color = get_theme_mod( 'illdy_latest_news_descriptions_color' );
-		$illdy_latest_news_general_color = get_theme_mod( 'illdy_latest_news_general_color' );
-		$illdy_latest_news_button_background = get_theme_mod( 'illdy_latest_news_button_background' );
+		$illdy_latest_news_title_color             = get_theme_mod( 'illdy_latest_news_title_color' );
+		$illdy_latest_news_descriptions_color      = get_theme_mod( 'illdy_latest_news_descriptions_color' );
+		$illdy_latest_news_general_color           = get_theme_mod( 'illdy_latest_news_general_color' );
+		$illdy_latest_news_button_background       = get_theme_mod( 'illdy_latest_news_button_background' );
 		$illdy_latest_news_button_background_hover = get_theme_mod( 'illdy_latest_news_button_background_hover' );
-		$illdy_latest_news_button_color = get_theme_mod( 'illdy_latest_news_button_color' );
-		$illdy_latest_news_post_bakground_color = get_theme_mod( 'illdy_latest_news_post_bakground_color' );
-		$illdy_latest_news_post_text_color = get_theme_mod( 'illdy_latest_news_post_text_color' );
-		$illdy_latest_news_post_text_hover_color = get_theme_mod( 'illdy_latest_news_post_text_hover_color' );
-		$illdy_latest_news_post_content_color = get_theme_mod( 'illdy_latest_news_post_content_color' );
-		$illdy_latest_news_post_button_color = get_theme_mod( 'illdy_latest_news_post_button_color' );
+		$illdy_latest_news_button_color            = get_theme_mod( 'illdy_latest_news_button_color' );
+		$illdy_latest_news_post_bakground_color    = get_theme_mod( 'illdy_latest_news_post_bakground_color' );
+		$illdy_latest_news_post_text_color         = get_theme_mod( 'illdy_latest_news_post_text_color' );
+		$illdy_latest_news_post_text_hover_color   = get_theme_mod( 'illdy_latest_news_post_text_hover_color' );
+		$illdy_latest_news_post_content_color      = get_theme_mod( 'illdy_latest_news_post_content_color' );
+		$illdy_latest_news_post_button_color       = get_theme_mod( 'illdy_latest_news_post_button_color' );
 		$illdy_latest_news_post_button_hover_color = get_theme_mod( 'illdy_latest_news_post_button_hover_color' );
-		$illdy_latest_news_general_image = get_theme_mod( 'illdy_latest_news_general_image' );
-		$illdy_latest_news_background_size = get_theme_mod( 'illdy_latest_news_background_size' );
-		$illdy_latest_news_background_repeat = get_theme_mod( 'illdy_latest_news_background_repeat' );
-		$illdy_latest_news_background_attachment = get_theme_mod( 'illdy_latest_news_background_attachment' );
-		$illdy_latest_news_background_position_y = get_theme_mod( 'illdy_latest_news_background_position_y' );
-		$illdy_latest_news_background_position_x = get_theme_mod( 'illdy_latest_news_background_position_x' );
+		$illdy_latest_news_general_image           = get_theme_mod( 'illdy_latest_news_general_image' );
+		$illdy_latest_news_background_size         = get_theme_mod( 'illdy_latest_news_background_size' );
+		$illdy_latest_news_background_repeat       = get_theme_mod( 'illdy_latest_news_background_repeat' );
+		$illdy_latest_news_background_attachment   = get_theme_mod( 'illdy_latest_news_background_attachment' );
+		$illdy_latest_news_background_position_y   = get_theme_mod( 'illdy_latest_news_background_position_y' );
+		$illdy_latest_news_background_position_x   = get_theme_mod( 'illdy_latest_news_background_position_x' );
 
 		$css = '';
 		if ( $illdy_latest_news_general_image ) {
@@ -323,13 +320,13 @@ if ( ! function_exists( 'illdy_latestnews_css' ) ) {
 if ( ! function_exists( 'illdy_fullwidth_css' ) ) {
 	function illdy_fullwidth_css() {
 
-		$illdy_full_width_title_color = get_theme_mod( 'illdy_full_width_title_color' );
-		$illdy_full_width_descriptions_color = get_theme_mod( 'illdy_full_width_descriptions_color' );
-		$illdy_full_width_full_text = get_theme_mod( 'illdy_full_width_full_text' );
-		$illdy_full_width_general_color = get_theme_mod( 'illdy_full_width_general_color', '' );
-		$illdy_full_width_general_image = get_theme_mod( 'illdy_full_width_general_image' );
-		$illdy_full_width_background_size = get_theme_mod( 'illdy_full_width_background_size' );
-		$illdy_full_width_background_repeat = get_theme_mod( 'illdy_full_width_background_repeat' );
+		$illdy_full_width_title_color           = get_theme_mod( 'illdy_full_width_title_color' );
+		$illdy_full_width_descriptions_color    = get_theme_mod( 'illdy_full_width_descriptions_color' );
+		$illdy_full_width_full_text             = get_theme_mod( 'illdy_full_width_full_text' );
+		$illdy_full_width_general_color         = get_theme_mod( 'illdy_full_width_general_color', '' );
+		$illdy_full_width_general_image         = get_theme_mod( 'illdy_full_width_general_image' );
+		$illdy_full_width_background_size       = get_theme_mod( 'illdy_full_width_background_size' );
+		$illdy_full_width_background_repeat     = get_theme_mod( 'illdy_full_width_background_repeat' );
 		$illdy_full_width_background_attachment = get_theme_mod( 'illdy_full_width_background_attachment' );
 		$illdy_full_width_background_position_y = get_theme_mod( 'illdy_full_width_background_position_y' );
 		$illdy_full_width_background_position_x = get_theme_mod( 'illdy_full_width_background_position_x' );
@@ -373,12 +370,12 @@ if ( ! function_exists( 'illdy_fullwidth_css' ) ) {
 if ( ! function_exists( 'illdy_about_css' ) ) {
 	function illdy_about_css() {
 
-		$illdy_about_title_color = get_theme_mod( 'illdy_about_title_color' );
-		$illdy_about_descriptions_color = get_theme_mod( 'illdy_about_descriptions_color' );
-		$illdy_about_general_color = get_theme_mod( 'illdy_about_general_color' );
-		$illdy_about_general_image = get_theme_mod( 'illdy_about_general_image' );
-		$illdy_about_background_size = get_theme_mod( 'illdy_about_background_size' );
-		$illdy_about_background_repeat = get_theme_mod( 'illdy_about_background_repeat' );
+		$illdy_about_title_color           = get_theme_mod( 'illdy_about_title_color' );
+		$illdy_about_descriptions_color    = get_theme_mod( 'illdy_about_descriptions_color' );
+		$illdy_about_general_color         = get_theme_mod( 'illdy_about_general_color' );
+		$illdy_about_general_image         = get_theme_mod( 'illdy_about_general_image' );
+		$illdy_about_background_size       = get_theme_mod( 'illdy_about_background_size' );
+		$illdy_about_background_repeat     = get_theme_mod( 'illdy_about_background_repeat' );
 		$illdy_about_background_attachment = get_theme_mod( 'illdy_about_background_attachment' );
 		$illdy_about_background_position_y = get_theme_mod( 'illdy_about_background_position_y' );
 		$illdy_about_background_position_x = get_theme_mod( 'illdy_about_background_position_x' );
@@ -419,12 +416,12 @@ if ( ! function_exists( 'illdy_about_css' ) ) {
 if ( ! function_exists( 'illdy_projects_css' ) ) {
 	function illdy_projects_css() {
 
-		$illdy_projects_title_color = get_theme_mod( 'illdy_projects_title_color' );
-		$illdy_projects_descriptions_color = get_theme_mod( 'illdy_projects_descriptions_color' );
-		$illdy_projects_general_color = get_theme_mod( 'illdy_projects_general_color' );
-		$illdy_projects_general_image = get_theme_mod( 'illdy_projects_general_image', get_template_directory_uri() . '/layout/images/front-page/pattern.png' );
-		$illdy_projects_background_size = get_theme_mod( 'illdy_projects_background_size','auto' );
-		$illdy_projects_background_repeat = get_theme_mod( 'illdy_projects_background_repeat',1 );
+		$illdy_projects_title_color           = get_theme_mod( 'illdy_projects_title_color' );
+		$illdy_projects_descriptions_color    = get_theme_mod( 'illdy_projects_descriptions_color' );
+		$illdy_projects_general_color         = get_theme_mod( 'illdy_projects_general_color' );
+		$illdy_projects_general_image         = get_theme_mod( 'illdy_projects_general_image', get_template_directory_uri() . '/layout/images/front-page/pattern.png' );
+		$illdy_projects_background_size       = get_theme_mod( 'illdy_projects_background_size', 'auto' );
+		$illdy_projects_background_repeat     = get_theme_mod( 'illdy_projects_background_repeat', 1 );
 		$illdy_projects_background_attachment = get_theme_mod( 'illdy_projects_background_attachment' );
 		$illdy_projects_background_position_y = get_theme_mod( 'illdy_projects_background_position_y' );
 		$illdy_projects_background_position_x = get_theme_mod( 'illdy_projects_background_position_x' );
@@ -465,12 +462,12 @@ if ( ! function_exists( 'illdy_projects_css' ) ) {
 if ( ! function_exists( 'illdy_services_css' ) ) {
 	function illdy_services_css() {
 
-		$illdy_services_title_color = get_theme_mod( 'illdy_services_title_color' );
-		$illdy_services_descriptions_color = get_theme_mod( 'illdy_services_descriptions_color' );
-		$illdy_services_general_color = get_theme_mod( 'illdy_services_general_color' );
-		$illdy_services_general_image = get_theme_mod( 'illdy_services_general_image' );
-		$illdy_services_background_size = get_theme_mod( 'illdy_services_background_size' );
-		$illdy_services_background_repeat = get_theme_mod( 'illdy_services_background_repeat' );
+		$illdy_services_title_color           = get_theme_mod( 'illdy_services_title_color' );
+		$illdy_services_descriptions_color    = get_theme_mod( 'illdy_services_descriptions_color' );
+		$illdy_services_general_color         = get_theme_mod( 'illdy_services_general_color' );
+		$illdy_services_general_image         = get_theme_mod( 'illdy_services_general_image' );
+		$illdy_services_background_size       = get_theme_mod( 'illdy_services_background_size' );
+		$illdy_services_background_repeat     = get_theme_mod( 'illdy_services_background_repeat' );
 		$illdy_services_background_attachment = get_theme_mod( 'illdy_services_background_attachment' );
 		$illdy_services_background_position_y = get_theme_mod( 'illdy_services_background_position_y' );
 		$illdy_services_background_position_x = get_theme_mod( 'illdy_services_background_position_x' );
@@ -511,12 +508,12 @@ if ( ! function_exists( 'illdy_services_css' ) ) {
 if ( ! function_exists( 'illdy_team_css' ) ) {
 	function illdy_team_css() {
 
-		$illdy_team_title_color = get_theme_mod( 'illdy_team_title_color' );
-		$illdy_team_descriptions_color = get_theme_mod( 'illdy_team_descriptions_color' );
-		$illdy_team_general_color = get_theme_mod( 'illdy_team_general_color' );
-		$illdy_team_general_image = get_theme_mod( 'illdy_team_general_image',get_template_directory_uri() . '/layout/images/front-page/pattern.png' );
-		$illdy_team_background_size = get_theme_mod( 'illdy_team_background_size','auto' );
-		$illdy_team_background_repeat = get_theme_mod( 'illdy_team_background_repeat',1 );
+		$illdy_team_title_color           = get_theme_mod( 'illdy_team_title_color' );
+		$illdy_team_descriptions_color    = get_theme_mod( 'illdy_team_descriptions_color' );
+		$illdy_team_general_color         = get_theme_mod( 'illdy_team_general_color' );
+		$illdy_team_general_image         = get_theme_mod( 'illdy_team_general_image', get_template_directory_uri() . '/layout/images/front-page/pattern.png' );
+		$illdy_team_background_size       = get_theme_mod( 'illdy_team_background_size', 'auto' );
+		$illdy_team_background_repeat     = get_theme_mod( 'illdy_team_background_repeat', 1 );
 		$illdy_team_background_attachment = get_theme_mod( 'illdy_team_background_attachment' );
 		$illdy_team_background_position_y = get_theme_mod( 'illdy_team_background_position_y' );
 		$illdy_team_background_position_x = get_theme_mod( 'illdy_team_background_position_x' );
@@ -557,17 +554,17 @@ if ( ! function_exists( 'illdy_team_css' ) ) {
 if ( ! function_exists( 'illdy_testimonials_css' ) ) {
 	function illdy_testimonials_css() {
 
-		$illdy_testimonials_title_color = get_theme_mod( 'illdy_testimonials_title_color' );
-		$illdy_testimonials_general_color = get_theme_mod( 'illdy_testimonials_general_color' );
+		$illdy_testimonials_title_color              = get_theme_mod( 'illdy_testimonials_title_color' );
+		$illdy_testimonials_general_color            = get_theme_mod( 'illdy_testimonials_general_color' );
 		$illdy_testimonials_general_background_image = get_theme_mod( 'illdy_testimonials_general_background_image', get_template_directory_uri() . '/layout/images/testiomnials-background.jpg' );
-		$illdy_testimonials_background_size = get_theme_mod( 'illdy_testimonials_background_size' );
-		$illdy_testimonials_background_repeat = get_theme_mod( 'illdy_testimonials_background_repeat' );
-		$illdy_testimonials_background_attachment = get_theme_mod( 'illdy_testimonials_background_attachment' );
+		$illdy_testimonials_background_size          = get_theme_mod( 'illdy_testimonials_background_size' );
+		$illdy_testimonials_background_repeat        = get_theme_mod( 'illdy_testimonials_background_repeat' );
+		$illdy_testimonials_background_attachment    = get_theme_mod( 'illdy_testimonials_background_attachment' );
 
-		$illdy_testimonials_author_text_color = get_theme_mod( 'illdy_testimonials_author_text_color' );
-		$illdy_testimonials_text_color = get_theme_mod( 'illdy_testimonials_text_color' );
+		$illdy_testimonials_author_text_color          = get_theme_mod( 'illdy_testimonials_author_text_color' );
+		$illdy_testimonials_text_color                 = get_theme_mod( 'illdy_testimonials_text_color' );
 		$illdy_testimonials_container_background_color = get_theme_mod( 'illdy_testimonials_container_background_color' );
-		$illdy_testimonials_dots_color = get_theme_mod( 'illdy_testimonials_dots_color' );
+		$illdy_testimonials_dots_color                 = get_theme_mod( 'illdy_testimonials_dots_color' );
 
 		$illdy_testimonials_background_position_y = get_theme_mod( 'illdy_testimonials_background_position_y' );
 		$illdy_testimonials_background_position_x = get_theme_mod( 'illdy_testimonials_background_position_x' );
@@ -619,22 +616,21 @@ if ( ! function_exists( 'illdy_testimonials_css' ) ) {
 if ( ! function_exists( 'illdy_output_sections_css' ) ) {
 
 	function illdy_output_sections_css() {
-	?>
+		?>
 
-		<style type="text/css" id="illdy-about-section-css"><?php echo illdy_jumbotron_css() ?></style>
-		<style type="text/css" id="illdy-latestnews-section-css"><?php echo illdy_latestnews_css() ?></style>
-		<style type="text/css" id="illdy-fullwidth-section-css"><?php echo illdy_fullwidth_css() ?></style>
-		<style type="text/css" id="illdy-about-section-css"><?php echo illdy_about_css() ?></style>
-		<style type="text/css" id="illdy-projects-section-css"><?php echo illdy_projects_css() ?></style>
-		<style type="text/css" id="illdy-services-section-css"><?php echo illdy_services_css() ?></style>
-		<style type="text/css" id="illdy-team-section-css"><?php echo illdy_team_css() ?></style>
-		<style type="text/css" id="illdy-testimonials-section-css"><?php echo illdy_testimonials_css() ?></style>
+        <style type="text/css" id="illdy-about-section-css"><?php echo illdy_jumbotron_css() ?></style>
+        <style type="text/css" id="illdy-latestnews-section-css"><?php echo illdy_latestnews_css() ?></style>
+        <style type="text/css" id="illdy-fullwidth-section-css"><?php echo illdy_fullwidth_css() ?></style>
+        <style type="text/css" id="illdy-about-section-css"><?php echo illdy_about_css() ?></style>
+        <style type="text/css" id="illdy-projects-section-css"><?php echo illdy_projects_css() ?></style>
+        <style type="text/css" id="illdy-services-section-css"><?php echo illdy_services_css() ?></style>
+        <style type="text/css" id="illdy-team-section-css"><?php echo illdy_team_css() ?></style>
+        <style type="text/css" id="illdy-testimonials-section-css"><?php echo illdy_testimonials_css() ?></style>
 
-	<?php
+		<?php
 	}
 
 	add_action( 'wp_head', 'illdy_output_sections_css', 99 );
-
 }
 
 add_filter( 'body_class', 'illdy_output_customizer_class' );
@@ -643,13 +639,14 @@ function illdy_output_customizer_class( $classes ) {
 	if ( is_customize_preview() ) {
 		$classes[] = 'illdy-customizer-preview';
 	}
+
 	return $classes;
 }
 
 // Background video related functions
 function illdy_get_video_url() {
 
-	$id = absint( get_theme_mod( 'illdy_jumbotron_video' ) );
+	$id  = absint( get_theme_mod( 'illdy_jumbotron_video' ) );
 	$url = esc_url( get_theme_mod( 'illdy_jumbotron_external_video' ) );
 
 	if ( $id ) {
@@ -660,6 +657,7 @@ function illdy_get_video_url() {
 	if ( ! $id && ! $url ) {
 		return false;
 	}
+
 	return esc_url_raw( set_url_scheme( $url ) );
 }
 
@@ -667,7 +665,7 @@ function illdy_get_video_settings() {
 	$header     = get_custom_header();
 	$video_url  = illdy_get_video_url();
 	$video_type = wp_check_filetype( $video_url, wp_get_mime_types() );
-	$settings = array(
+	$settings   = [
 		'mimeType'  => '',
 		'posterUrl' => '',
 		'videoUrl'  => $video_url,
@@ -675,17 +673,18 @@ function illdy_get_video_settings() {
 		'height'    => 1080,
 		'minWidth'  => 900,
 		'minHeight' => 500,
-		'l10n'      => array(
+		'l10n'      => [
 			'pause'      => __( 'Pause', 'illdy' ),
 			'play'       => __( 'Play', 'illdy' ),
 			'pauseSpeak' => __( 'Video is paused.', 'illdy' ),
 			'playSpeak'  => __( 'Video is playing.', 'illdy' ),
-		),
-	);
+		],
+	];
 	if ( preg_match( '#^https?://(?:www\.)?(?:youtube\.com/watch|youtu\.be/)#', $video_url ) ) {
 		$settings['mimeType'] = 'video/x-youtube';
 	} elseif ( ! empty( $video_type['type'] ) ) {
 		$settings['mimeType'] = $video_type['type'];
 	}
+
 	return apply_filters( 'header_video_settings', $settings );
 }

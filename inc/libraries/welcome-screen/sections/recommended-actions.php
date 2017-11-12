@@ -35,20 +35,20 @@ $hooray = true;
 			}
 
 			?>
-			<div class="action-required-box">
+            <div class="action-required-box">
 				<span data-action="<?php echo $hidden ? 'visible' : 'hidden'; ?>" class="dashicons <?php echo $hidden ? 'dashicons-hidden' : 'dashicons-visibility'; ?> required-action-button" id="<?php echo esc_attr( $value['id'] ); ?>">
 				</span>
 
 				<?php if ( ! empty( $value['title'] ) ) { ?>
-					<h3> <?php echo esc_html( $value['title'] ); ?></h3>
+                    <h3> <?php echo esc_html( $value['title'] ); ?></h3>
 				<?php } ?>
 
 				<?php if ( ! empty( $value['description'] ) ) { ?>
-					<p>
+                    <p>
 						<?php echo wp_kses_post( $value['description'] ); ?>
-						<br/>
+                        <br/>
 
-					</p>
+                    </p>
 					<?php if ( ! empty( $value['help'] ) ) { ?>
 
 						<?php
@@ -73,19 +73,19 @@ $hooray = true;
 					$link   = $this->create_plugin_link( $plugin['needs'], $value['plugin_slug'] );
 
 					?>
-					<p class="plugin-card-<?php echo esc_attr( $value['plugin_slug'] ); ?> action_button <?php echo ( 'install' !== $plugin['needs'] && $plugin['active'] ) ? 'active' : ''; ?>">
-						<a data-slug="<?php echo esc_attr( $value['plugin_slug'] ); ?>" class="<?php echo esc_attr( $plugin['class'] ); ?>" href="<?php echo esc_url( $plugin['url'] ); ?>"> <?php echo esc_html( $plugin['label'] ); ?> </a>
-					</p>
+                    <p class="plugin-card-<?php echo esc_attr( $value['plugin_slug'] ); ?> action_button <?php echo ( 'install' !== $plugin['needs'] && $plugin['active'] ) ? 'active' : ''; ?>">
+                        <a data-slug="<?php echo esc_attr( $value['plugin_slug'] ); ?>" class="<?php echo esc_attr( $plugin['class'] ); ?>" href="<?php echo esc_url( $plugin['url'] ); ?>"> <?php echo esc_html( $plugin['label'] ); ?> </a>
+                    </p>
 				<?php } ?>
 
 				<?php $hooray = false; ?>
-			</div>
+            </div>
 		<?php } // End foreach(). ?>
 
 	<?php } // End if(). ?>
 
 	<?php if ( $hooray ) { ?>
-		<span class="hooray"><?php echo esc_html__( 'Hooray! There are no required actions for you right now.', 'epsilon-framework' ); ?> </span>
+        <span class="hooray"><?php echo esc_html__( 'Hooray! There are no required actions for you right now.', 'epsilon-framework' ); ?> </span>
 	<?php } ?>
 
 </div>

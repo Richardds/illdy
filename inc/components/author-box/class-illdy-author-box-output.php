@@ -5,8 +5,7 @@ if ( ! class_exists( 'Illdy_Author_Box_Output' ) ) {
 	/**
 	 * Class Illdy_Author_Box_Output
 	 */
-	class Illdy_Author_Box_Output {
-
+	class Illdy_Author_Box_Output{
 		/**
 		 * @var Singleton The reference to *Singleton* instance of this class
 		 */
@@ -16,7 +15,7 @@ if ( ! class_exists( 'Illdy_Author_Box_Output' ) ) {
 		 *
 		 */
 		protected function __construct() {
-			add_action( 'illdy_single_after_content', array( $this, 'output_author_box' ), 3 );
+			add_action( 'illdy_single_after_content', [ $this, 'output_author_box' ], 3 );
 		}
 
 		/**
@@ -59,9 +58,9 @@ if ( ! class_exists( 'Illdy_Author_Box_Output' ) ) {
 			$output = '';
 
 			$output .= '<div class="blog-post-author clearfix">';
-				$output .= get_avatar( get_the_author_meta( 'user_email' ), 98 );
-				$output .= '<h4>' . esc_html( get_the_author() ) . '</h4>';
-				$output .= ( get_the_author_meta( 'description' ) ) ? '<p>' . esc_html( get_the_author_meta( 'description' ) ) . '</p>' : '';
+			$output .= get_avatar( get_the_author_meta( 'user_email' ), 98 );
+			$output .= '<h4>' . esc_html( get_the_author() ) . '</h4>';
+			$output .= ( get_the_author_meta( 'description' ) ) ? '<p>' . esc_html( get_the_author_meta( 'description' ) ) . '</p>' : '';
 			$output .= '</div><!--/.blog-post-author.clearfix-->';
 
 			echo $output;
@@ -86,5 +85,6 @@ if ( ! function_exists( 'illdy_call_author_box_class' ) ) {
 			Illdy_Author_Box_Output::get_instance();
 		}
 	}
+
 	add_action( 'wp_loaded', 'illdy_call_author_box_class' );
 }

@@ -13,59 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Class EDD_Theme_Helper
  */
-class EDD_Theme_Helper {
-	/**
-	 * Returns a translation string array
-	 *
-	 * @return array
-	 */
-	public static function get_strings() {
-		return array(
-			/* Translators: Registration */
-			'theme-license'             => __( 'Registration', 'epsilon-framework' ),
-			/* Translators: Enter Key field label */
-			'enter-key'                 => __( 'Enter your theme license key.', 'epsilon-framework' ),
-			/* Translators: License Key */
-			'license-key'               => __( 'License Key', 'epsilon-framework' ),
-			/* Translators: Action */
-			'license-action'            => __( 'License Action', 'epsilon-framework' ),
-			/* Translators: Deactivate License Label */
-			'deactivate-license'        => __( 'Deactivate License', 'epsilon-framework' ),
-			/* Translators: Activate License Label */
-			'activate-license'          => __( 'Activate License', 'epsilon-framework' ),
-			/* Translators: Unknown License Label */
-			'status-unknown'            => __( 'License status is unknown.', 'epsilon-framework' ),
-			/* Translators: Renewal Label */
-			'renew'                     => __( 'Renew?', 'epsilon-framework' ),
-			/* Translators: Unlimited activations */
-			'unlimited'                 => __( 'unlimited', 'epsilon-framework' ),
-			/* Translators: Active key */
-			'license-key-is-active'     => __( 'License key is active.', 'epsilon-framework' ),
-			/* Translators: expires */
-			'expires%s'                 => __( 'Expires %s.', 'epsilon-framework' ),
-			/* Translators: websites activated */
-			'%1$s/%2$-sites'            => __( 'You have %1$s / %2$s sites activated.', 'epsilon-framework' ),
-			/* Translators: License expired*/
-			'license-key-expired-%s'    => __( 'License key expired %s.', 'epsilon-framework' ),
-			/* Translators: Expired License Key */
-			'license-key-expired'       => __( 'License key has expired.', 'epsilon-framework' ),
-			/* Translators: Match failed */
-			'license-keys-do-not-match' => __( 'License keys do not match.', 'epsilon-framework' ),
-			/* Translators: Inactive license */
-			'license-is-inactive'       => __( 'License is inactive.', 'epsilon-framework' ),
-			/* Translators: Disabled license */
-			'license-key-is-disabled'   => __( 'License key is disabled.', 'epsilon-framework' ),
-			/* Translators: Inactive website */
-			'site-is-inactive'          => __( 'Site is inactive.', 'epsilon-framework' ),
-			/* Translators: Unknown license key */
-			'license-status-unknown'    => __( 'License status is unknown.', 'epsilon-framework' ),
-			/* Translators: Update notice */
-			'update-notice'             => __( "Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update.", 'epsilon-framework' ),
-			/* Translators: license sites, title, update link */
-			'update-available'          => __( '<strong>%1$s %2$s</strong> is available. <a href="%3$s" class="thickbox" title="%4$s">Check out what\'s new</a> or <a href="%5$s"%6$s>update now</a>.', 'epsilon-framework' ),
-		);
-	}
-
+class EDD_Theme_Helper{
 	/**
 	 * Initiate actions to register settings and update theme
 	 */
@@ -73,6 +21,38 @@ class EDD_Theme_Helper {
 		$instance = Epsilon_Welcome_Screen::get_instance();
 		self::register_option( $instance );
 		self::updater( $instance );
+	}
+
+	/**
+	 * Registers the option used to store the license key in the options table.
+	 *
+	 * @param object $instance Option instance.
+	 */
+	public static function register_option( $instance ) {
+		register_setting( $instance->theme_slug . '-license', $instance->theme_slug . '_license_key', [
+				'EDD_Theme_Helper',
+				'sanitize_license',
+			] );
+	}
+
+	/**
+	 * Creates the theme updater class.
+	 *
+	 * @param object $instance Option instance.
+	 */
+	public static function updater( $instance ) {
+		/**
+		 * In case we don`t have a valid license, return here
+		 */
+		if ( get_option( $instance->theme_slug . '_license_key_status', false ) !== 'valid' ) {
+			return;
+		}
+
+		$arr = [
+			'license' => get_option( $instance->theme_slug . '_license_key', false ),
+		];
+
+		new Epsilon_Updater_Class( $arr );
 	}
 
 	/**
@@ -91,23 +71,70 @@ class EDD_Theme_Helper {
 				self::license_activator_deactivator( 'deactivate_license' );
 			}
 		}
-
 	}
 
 	/**
-	 * Registers the option used to store the license key in the options table.
+	 * Handles the license action.
 	 *
-	 * @param object $instance Option instance.
+	 * @param string $action What to do with the license.
 	 */
-	public static function register_option( $instance ) {
-		register_setting(
-			$instance->theme_slug . '-license',
-			$instance->theme_slug . '_license_key',
-			array(
-				'EDD_Theme_Helper',
-				'sanitize_license',
-			)
-		);
+	public static function license_activator_deactivator( $action = '' ) {
+		$instance = Epsilon_Welcome_Screen::get_instance();
+		$license  = trim( get_option( $instance->theme_slug . '_license_key' ) );
+
+		if ( empty( $action ) ) {
+			$action = 'activate_license';
+		}
+
+		$api_params = [
+			'edd_action' => $action,
+			'license'    => $license,
+			'item_name'  => rawurlencode( $instance->theme_slug ),
+		];
+
+		$license_data = self::get_api_response( $api_params );
+
+		switch ( $action ) {
+			case 'deactivate_license':
+				if ( $license_data && ( 'deactivated' === $license_data->license ) ) {
+					delete_option( $instance->theme_slug . '_license_key_status' );
+					delete_transient( $instance->theme_slug . '_license_message' );
+				}
+				break;
+			default:
+				if ( $license_data && isset( $license_data->license ) ) {
+					update_option( $instance->theme_slug . '_license_key_status', $license_data->license );
+					delete_transient( $instance->theme_slug . '_license_message' );
+				}
+				break;
+		}
+	}
+
+	/**
+	 * Get a response from our website.
+	 *
+	 * @param array $params Configuration array.
+	 *
+	 * @return mixed
+	 */
+	public static function get_api_response( $params ) {
+		$theme = wp_get_theme();
+
+		// Call the custom API.
+		$response = wp_remote_post( $theme->get( 'AuthorURI' ), [
+				'timeout'   => 15,
+				'sslverify' => false,
+				'body'      => $params,
+			] );
+
+		// Make sure the response came back okay.
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$response = json_decode( wp_remote_retrieve_body( $response ) );
+
+		return $response;
 	}
 
 	/**
@@ -133,7 +160,7 @@ class EDD_Theme_Helper {
 	/**
 	 * We need to disable wporg requests at this time
 	 *
-	 * @param object $r   Request object.
+	 * @param object $r Request object.
 	 * @param string $url URL String.
 	 *
 	 * @return mixed
@@ -161,47 +188,6 @@ class EDD_Theme_Helper {
 	}
 
 	/**
-	 * Creates the theme updater class.
-	 *
-	 * @param object $instance Option instance.
-	 */
-	public static function updater( $instance ) {
-		/**
-		 * In case we don`t have a valid license, return here
-		 */
-		if ( get_option( $instance->theme_slug . '_license_key_status', false ) !== 'valid' ) {
-			return;
-		}
-
-		$arr = array(
-			'license' => get_option( $instance->theme_slug . '_license_key', false ),
-		);
-
-		new Epsilon_Updater_Class( $arr );
-	}
-
-	/**
-	 * Returns a renewal link
-	 *
-	 * @return string
-	 */
-	public static function get_renewal_link() {
-		$instance = Epsilon_Welcome_Screen::get_instance();
-		$theme    = wp_get_theme();
-
-		$license_key = trim( get_option( $instance->theme_slug . '_license_key', false ) );
-		if ( '' !== $instance->download_id && $license_key ) {
-			$url = esc_url( $theme->get( 'AuthorURI' ) );
-			$url .= '/checkout/?edd_license_key=' . $license_key . '&download_id=' . $instance->download_id;
-
-			return $url;
-		}
-
-		// Otherwise return the remote_api_url.
-		return $theme->get( 'AuthorURI' );
-	}
-
-	/**
 	 * Checks if license is valid and gets expire date.
 	 *
 	 * @since 1.0.0
@@ -213,12 +199,12 @@ class EDD_Theme_Helper {
 		$license  = trim( get_option( $instance->theme_slug . '_license_key' ) );
 		$strings  = self::get_strings();
 
-		$api_params = array(
+		$api_params = [
 			'edd_action' => 'check_license',
 			'license'    => $license,
 			'item_name'  => rawurlencode( $instance->theme_slug ),
 			'url'        => home_url(),
-		);
+		];
 
 		$license_data = self::get_api_response( $api_params );
 
@@ -284,69 +270,75 @@ class EDD_Theme_Helper {
 	}
 
 	/**
-	 * Handles the license action.
+	 * Returns a translation string array
 	 *
-	 * @param string $action What to do with the license.
+	 * @return array
 	 */
-	public static function license_activator_deactivator( $action = '' ) {
-		$instance = Epsilon_Welcome_Screen::get_instance();
-		$license  = trim( get_option( $instance->theme_slug . '_license_key' ) );
-
-		if ( empty( $action ) ) {
-			$action = 'activate_license';
-		}
-
-		$api_params = array(
-			'edd_action' => $action,
-			'license'    => $license,
-			'item_name'  => rawurlencode( $instance->theme_slug ),
-		);
-
-		$license_data = self::get_api_response( $api_params );
-
-		switch ( $action ) {
-			case 'deactivate_license':
-				if ( $license_data && ( 'deactivated' === $license_data->license ) ) {
-					delete_option( $instance->theme_slug . '_license_key_status' );
-					delete_transient( $instance->theme_slug . '_license_message' );
-				}
-				break;
-			default:
-				if ( $license_data && isset( $license_data->license ) ) {
-					update_option( $instance->theme_slug . '_license_key_status', $license_data->license );
-					delete_transient( $instance->theme_slug . '_license_message' );
-				}
-				break;
-		}
+	public static function get_strings() {
+		return [
+			/* Translators: Registration */
+			'theme-license'             => __( 'Registration', 'epsilon-framework' ),
+			/* Translators: Enter Key field label */
+			'enter-key'                 => __( 'Enter your theme license key.', 'epsilon-framework' ),
+			/* Translators: License Key */
+			'license-key'               => __( 'License Key', 'epsilon-framework' ),
+			/* Translators: Action */
+			'license-action'            => __( 'License Action', 'epsilon-framework' ),
+			/* Translators: Deactivate License Label */
+			'deactivate-license'        => __( 'Deactivate License', 'epsilon-framework' ),
+			/* Translators: Activate License Label */
+			'activate-license'          => __( 'Activate License', 'epsilon-framework' ),
+			/* Translators: Unknown License Label */
+			'status-unknown'            => __( 'License status is unknown.', 'epsilon-framework' ),
+			/* Translators: Renewal Label */
+			'renew'                     => __( 'Renew?', 'epsilon-framework' ),
+			/* Translators: Unlimited activations */
+			'unlimited'                 => __( 'unlimited', 'epsilon-framework' ),
+			/* Translators: Active key */
+			'license-key-is-active'     => __( 'License key is active.', 'epsilon-framework' ),
+			/* Translators: expires */
+			'expires%s'                 => __( 'Expires %s.', 'epsilon-framework' ),
+			/* Translators: websites activated */
+			'%1$s/%2$-sites'            => __( 'You have %1$s / %2$s sites activated.', 'epsilon-framework' ),
+			/* Translators: License expired*/
+			'license-key-expired-%s'    => __( 'License key expired %s.', 'epsilon-framework' ),
+			/* Translators: Expired License Key */
+			'license-key-expired'       => __( 'License key has expired.', 'epsilon-framework' ),
+			/* Translators: Match failed */
+			'license-keys-do-not-match' => __( 'License keys do not match.', 'epsilon-framework' ),
+			/* Translators: Inactive license */
+			'license-is-inactive'       => __( 'License is inactive.', 'epsilon-framework' ),
+			/* Translators: Disabled license */
+			'license-key-is-disabled'   => __( 'License key is disabled.', 'epsilon-framework' ),
+			/* Translators: Inactive website */
+			'site-is-inactive'          => __( 'Site is inactive.', 'epsilon-framework' ),
+			/* Translators: Unknown license key */
+			'license-status-unknown'    => __( 'License status is unknown.', 'epsilon-framework' ),
+			/* Translators: Update notice */
+			'update-notice'             => __( "Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update.", 'epsilon-framework' ),
+			/* Translators: license sites, title, update link */
+			'update-available'          => __( '<strong>%1$s %2$s</strong> is available. <a href="%3$s" class="thickbox" title="%4$s">Check out what\'s new</a> or <a href="%5$s"%6$s>update now</a>.', 'epsilon-framework' ),
+		];
 	}
 
 	/**
-	 * Get a response from our website.
+	 * Returns a renewal link
 	 *
-	 * @param array $params Configuration array.
-	 *
-	 * @return mixed
+	 * @return string
 	 */
-	public static function get_api_response( $params ) {
-		$theme = wp_get_theme();
+	public static function get_renewal_link() {
+		$instance = Epsilon_Welcome_Screen::get_instance();
+		$theme    = wp_get_theme();
 
-		// Call the custom API.
-		$response = wp_remote_post(
-			$theme->get( 'AuthorURI' ),
-			array(
-				'timeout'   => 15,
-				'sslverify' => false,
-				'body'      => $params,
-			)
-		);
+		$license_key = trim( get_option( $instance->theme_slug . '_license_key', false ) );
+		if ( '' !== $instance->download_id && $license_key ) {
+			$url = esc_url( $theme->get( 'AuthorURI' ) );
+			$url .= '/checkout/?edd_license_key=' . $license_key . '&download_id=' . $instance->download_id;
 
-		// Make sure the response came back okay.
-		if ( is_wp_error( $response ) ) {
-			return false;
+			return $url;
 		}
 
-		$response = json_decode( wp_remote_retrieve_body( $response ) );
-
-		return $response;
+		// Otherwise return the remote_api_url.
+		return $theme->get( 'AuthorURI' );
 	}
 }

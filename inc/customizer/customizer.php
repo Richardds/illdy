@@ -29,102 +29,102 @@ if ( ! function_exists( 'illdy_customize_register' ) ) {
 		$wp_customize->register_control_type( 'Epsilon_Control_Button' );
 
 		// Pro Section
-		$wp_customize->add_section( new Epsilon_Section_Pro( $wp_customize, 'illdy-pro-section', array(
-			'title'    => esc_html__( 'Illdy', 'illdy' ),
+		$wp_customize->add_section( new Epsilon_Section_Pro( $wp_customize, 'illdy-pro-section', [
+			'title'       => esc_html__( 'Illdy', 'illdy' ),
 			'button_text' => esc_html__( 'Documentation', 'illdy' ),
 			'button_url'  => 'https://colorlib.com/wp/support/illdy/',
-			'priority' => 0,
-		) ) );
+			'priority'    => 0,
+		] ) );
 
 		// Front Page sections panel
-		$wp_customize->add_panel( 'illdy_frontpage_panel', array(
-			'priority'       => 2,
-			'title'          => esc_html__( 'Front Page Sections', 'illdy' ),
-			'description'    => esc_html__( 'Drag & drop to reorder front-page sections', 'illdy' ),
-		) );
+		$wp_customize->add_panel( 'illdy_frontpage_panel', [
+			'priority'    => 2,
+			'title'       => esc_html__( 'Front Page Sections', 'illdy' ),
+			'description' => esc_html__( 'Drag & drop to reorder front-page sections', 'illdy' ),
+		] );
 
 		// Color Scheme
-		$wp_customize->add_setting( 'illdy_color_scheme', array(
+		$wp_customize->add_setting( 'illdy_color_scheme', [
 			'sanitize_callback' => 'esc_html',
 			'default'           => 'default',
 			'transport'         => 'postMessage',
-		) );
-		$wp_customize->add_control( new Epsilon_Control_Color_Scheme( $wp_customize, 'illdy_color_scheme', array(
+		] );
+		$wp_customize->add_control( new Epsilon_Control_Color_Scheme( $wp_customize, 'illdy_color_scheme', [
 			'type'        => 'epsilon-color-scheme',
 			'label'       => esc_html__( 'Color scheme', 'illdy' ),
 			'description' => esc_html__( 'Select a color scheme', 'illdy' ),
-			'choices'     => array(
-				array(
+			'choices'     => [
+				[
 					'id'     => 'default',
 					'name'   => 'Default',
-					'colors' => array(
-						'epsilon_accent_color'              => '#f1d204',
-						'epsilon_secondary_accent_color'    => '#f18b6d',
-						'epsilon_text_color'                => '#545454',
-						'epsilon_contrast_color'            => '#8c9597',
-						'epsilon_hover_color'               => '#6a4d8a',
-					),
-				),
-				array(
+					'colors' => [
+						'epsilon_accent_color'           => '#f1d204',
+						'epsilon_secondary_accent_color' => '#f18b6d',
+						'epsilon_text_color'             => '#545454',
+						'epsilon_contrast_color'         => '#8c9597',
+						'epsilon_hover_color'            => '#6a4d8a',
+					],
+				],
+				[
 					'id'     => 'palette-1',
 					'name'   => 'Palette 1',
-					'colors' => array(
-						'epsilon_accent_color'              => '#ff004f',
-						'epsilon_secondary_accent_color'    => '#f18b6d',
-						'epsilon_text_color'                => '#545454',
-						'epsilon_contrast_color'            => '#8c9597',
-						'epsilon_hover_color'               => '#482c54',
-					),
-				),
-				array(
+					'colors' => [
+						'epsilon_accent_color'           => '#ff004f',
+						'epsilon_secondary_accent_color' => '#f18b6d',
+						'epsilon_text_color'             => '#545454',
+						'epsilon_contrast_color'         => '#8c9597',
+						'epsilon_hover_color'            => '#482c54',
+					],
+				],
+				[
 					'id'     => 'palette-2',
 					'name'   => 'Palette 2',
-					'colors' => array(
-						'epsilon_accent_color'              => '#f66f6d',
-						'epsilon_secondary_accent_color'    => '#f18b6d',
-						'epsilon_text_color'                => '#545454',
-						'epsilon_contrast_color'            => '#8c9597',
-						'epsilon_hover_color'               => '#195962',
-					),
-				),
-				array(
+					'colors' => [
+						'epsilon_accent_color'           => '#f66f6d',
+						'epsilon_secondary_accent_color' => '#f18b6d',
+						'epsilon_text_color'             => '#545454',
+						'epsilon_contrast_color'         => '#8c9597',
+						'epsilon_hover_color'            => '#195962',
+					],
+				],
+				[
 					'id'     => 'palette-3',
 					'name'   => 'Palette 3',
-					'colors' => array(
-						'epsilon_accent_color'              => '#f79e27',
-						'epsilon_secondary_accent_color'    => '#f18b6d',
-						'epsilon_text_color'                => '#545454',
-						'epsilon_contrast_color'            => '#8c9597',
-						'epsilon_hover_color'               => '#e95e4e',
-					),
-				),
-				array(
+					'colors' => [
+						'epsilon_accent_color'           => '#f79e27',
+						'epsilon_secondary_accent_color' => '#f18b6d',
+						'epsilon_text_color'             => '#545454',
+						'epsilon_contrast_color'         => '#8c9597',
+						'epsilon_hover_color'            => '#e95e4e',
+					],
+				],
+				[
 					'id'     => 'palette-4',
 					'name'   => 'Palette 4',
-					'colors' => array(
-						'epsilon_accent_color'              => '#6ebbdc',
-						'epsilon_secondary_accent_color'    => '#f18b6d',
-						'epsilon_text_color'                => '#545454',
-						'epsilon_contrast_color'            => '#8c9597',
-						'epsilon_hover_color'               => '#2e3d51',
-					),
-				),
-				array(
+					'colors' => [
+						'epsilon_accent_color'           => '#6ebbdc',
+						'epsilon_secondary_accent_color' => '#f18b6d',
+						'epsilon_text_color'             => '#545454',
+						'epsilon_contrast_color'         => '#8c9597',
+						'epsilon_hover_color'            => '#2e3d51',
+					],
+				],
+				[
 					'id'     => 'palette-5',
 					'name'   => 'Palette 5',
-					'colors' => array(
-						'epsilon_accent_color'              => '#507fe2',
-						'epsilon_secondary_accent_color'    => '#f18b6d',
-						'epsilon_text_color'                => '#545454',
-						'epsilon_contrast_color'            => '#8c9597',
-						'epsilon_hover_color'               => '#1acdcb',
-					),
-				),
-			),
+					'colors' => [
+						'epsilon_accent_color'           => '#507fe2',
+						'epsilon_secondary_accent_color' => '#f18b6d',
+						'epsilon_text_color'             => '#545454',
+						'epsilon_contrast_color'         => '#8c9597',
+						'epsilon_hover_color'            => '#1acdcb',
+					],
+				],
+			],
 			'priority'    => 0,
 			'default'     => 'red',
 			'section'     => 'colors',
-		) ) );
+		] ) );
 
 		// General Options
 		require_once get_template_directory() . '/inc/customizer/panels/general-options.php';
@@ -173,16 +173,15 @@ if ( ! function_exists( 'illdy_customizer_live_preview' ) ) {
 	add_action( 'customize_preview_init', 'illdy_customizer_live_preview' );
 
 	function illdy_customizer_live_preview() {
-		wp_enqueue_script( 'illdy-handlebars', get_template_directory_uri() . '/inc/customizer/assets/js/handlebars.js', array(), '1.0', true );
-		wp_enqueue_script( 'illdy-scrollto', get_template_directory_uri() . '/inc/customizer/assets/js/jquery.scrollTo.js', array(), '1.0', true );
-		wp_enqueue_script( 'illdy-customizer-live-preview', get_template_directory_uri() . '/inc/customizer/assets/js/illdy-customizer-live-preview.js', array( 'customize-preview' ), '1.0', true );
+		wp_enqueue_script( 'illdy-handlebars', get_template_directory_uri() . '/inc/customizer/assets/js/handlebars.js', [], '1.0', true );
+		wp_enqueue_script( 'illdy-scrollto', get_template_directory_uri() . '/inc/customizer/assets/js/jquery.scrollTo.js', [], '1.0', true );
+		wp_enqueue_script( 'illdy-customizer-live-preview', get_template_directory_uri() . '/inc/customizer/assets/js/illdy-customizer-live-preview.js', [ 'customize-preview' ], '1.0', true );
 
-		wp_localize_script( 'illdy-customizer-live-preview', 'WPUrls', array(
+		wp_localize_script( 'illdy-customizer-live-preview', 'WPUrls', [
 			'siteurl' => get_option( 'siteurl' ),
 			'theme'   => get_template_directory_uri(),
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-		) );
-
+		] );
 	}
 }
 
@@ -199,20 +198,19 @@ if ( ! function_exists( 'illdy_customizer_js_load' ) ) {
 		wp_enqueue_style( 'plugin-install' );
 		wp_enqueue_script( 'plugin-install' );
 		wp_enqueue_script( 'updates' );
-		wp_localize_script( 'updates', '_wpUpdatesItemCounts', array(
-			'totals'  => wp_get_update_data(),
-		) );
+		wp_localize_script( 'updates', '_wpUpdatesItemCounts', [
+			'totals' => wp_get_update_data(),
+		] );
 		wp_add_inline_script( 'plugin-install', 'var pagenow = "plugin-install";' );
-		wp_enqueue_script( 'illdy-customizer', get_template_directory_uri() . '/inc/customizer/assets/js/illdy-customizer.js', array( 'customize-controls' ), '1.0', true );
+		wp_enqueue_script( 'illdy-customizer', get_template_directory_uri() . '/inc/customizer/assets/js/illdy-customizer.js', [ 'customize-controls' ], '1.0', true );
 
-		$illdy_customizer = array();
-		$illdy_customizer['sections'] = illdy_get_sections_position();
-		$illdy_customizer['ajax_url'] = admin_url( 'admin-ajax.php' );
+		$illdy_customizer                       = [];
+		$illdy_customizer['sections']           = illdy_get_sections_position();
+		$illdy_customizer['ajax_url']           = admin_url( 'admin-ajax.php' );
 		$illdy_customizer['template_directory'] = get_template_directory_uri();
-		$illdy_customizer['site_url'] = site_url();
+		$illdy_customizer['site_url']           = site_url();
 
 		wp_localize_script( 'illdy-customizer', 'IlldyCustomizer', $illdy_customizer );
-
 	}
 
 	add_action( 'customize_controls_enqueue_scripts', 'illdy_customizer_js_load', 99 );
@@ -293,11 +291,11 @@ if ( ! function_exists( 'illdy_is_not_active_contact_form_7' ) ) {
 if ( ! function_exists( 'illdy_have_not_contact_form_7' ) ) {
 	function illdy_have_not_contact_form_7() {
 		if ( class_exists( 'WPCF7' ) ) {
-			$args = array(
-				'post_type' => 'wpcf7_contact_form',
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
-			);
+			$args  = [
+				'post_type'      => 'wpcf7_contact_form',
+				'post_status'    => 'publish',
+				'posts_per_page' => - 1,
+			];
 			$posts = get_posts( $args );
 			if ( count( $posts ) > 0 ) {
 				return false;
@@ -312,14 +310,14 @@ if ( ! function_exists( 'illdy_have_not_contact_form_7' ) ) {
 
 if ( ! function_exists( 'illdy_create_contact_tab_sections' ) ) {
 	function illdy_create_contact_tab_sections() {
-		$prefix = 'illdy';
-		$sections = array(
+		$prefix   = 'illdy';
+		$sections = [
 			$prefix . '_contact_us_show',
 			$prefix . '_contact_us_general_title',
 			$prefix . '_contact_us_entry',
 			$prefix . '_contact_us_general_address_title',
 			$prefix . '_contact_us_general_customer_support_title',
-		);
+		];
 
 		if ( illdy_is_not_active_contact_form_7() ) {
 			$sections[] = $prefix . '_contact_us_install_contact_form_7';
@@ -328,6 +326,7 @@ if ( ! function_exists( 'illdy_create_contact_tab_sections' ) ) {
 		} else {
 			$sections[] = $prefix . '_contact_us_general_contact_form_7';
 		}
+
 		return $sections;
 	}
 }
@@ -339,21 +338,21 @@ if ( ! function_exists( 'illdy_sanitize_html' ) ) {
 	function illdy_sanitize_html( $input ) {
 		$input = force_balance_tags( $input );
 
-		$allowed_html = array(
-			'a'      => array(
-				'href'  => array(),
-				'title' => array(),
-			),
-			'br'     => array(),
-			'em'     => array(),
-			'img'    => array(
-				'alt'    => array(),
-				'src'    => array(),
-				'srcset' => array(),
-				'title'  => array(),
-			),
-			'strong' => array(),
-		);
+		$allowed_html = [
+			'a'      => [
+				'href'  => [],
+				'title' => [],
+			],
+			'br'     => [],
+			'em'     => [],
+			'img'    => [
+				'alt'    => [],
+				'src'    => [],
+				'srcset' => [],
+				'title'  => [],
+			],
+			'strong' => [],
+		];
 		$output       = wp_kses( $input, $allowed_html );
 
 		return $output;
@@ -452,7 +451,7 @@ if ( ! function_exists( 'illdy_jumbotron_general_second_row_from_title' ) ) {
 // New
 if ( ! function_exists( 'illdy_img_footer_logo' ) ) {
 	function illdy_img_footer_logo() {
-		$img_footer_logo   = get_theme_mod( 'illdy_img_footer_logo' );
+		$img_footer_logo = get_theme_mod( 'illdy_img_footer_logo' );
 		if ( $img_footer_logo ) {
 			$html = '<img src="' . esc_url( $img_footer_logo ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" title="' . esc_attr( get_bloginfo( 'name' ) ) . '" />';
 		} else {
@@ -465,8 +464,8 @@ if ( ! function_exists( 'illdy_img_footer_logo' ) ) {
 
 if ( ! function_exists( 'illdy_custom_logo' ) ) {
 	function illdy_custom_logo() {
-		$logo_id                   = get_theme_mod( 'custom_logo' );
-		$logo_image                = wp_get_attachment_image_src( $logo_id, 'full' );
+		$logo_id    = get_theme_mod( 'custom_logo' );
+		$logo_image = wp_get_attachment_image_src( $logo_id, 'full' );
 
 		return '<img src="' . esc_url( $logo_image[0] ) . '" />';
 	}
@@ -521,7 +520,6 @@ function illdy_order_sections() {
 
 		set_theme_mod( 'illdy_frontpage_sections', $_POST['sections'] );
 		echo 'succes';
-
 	}
 
 	wp_die(); // this is required to terminate immediately and return a proper response
@@ -529,7 +527,7 @@ function illdy_order_sections() {
 
 if ( ! function_exists( 'illdy_get_sections_position' ) ) {
 	function illdy_get_sections_position() {
-		$defaults = array(
+		$defaults = [
 			'illdy_panel_about',
 			'illdy_panel_projects',
 			'illdy_testimonials_general',
@@ -539,8 +537,9 @@ if ( ! function_exists( 'illdy_get_sections_position' ) ) {
 			'illdy_panel_team',
 			'illdy_contact_us',
 			'illdy_full_width',
-		);
+		];
 		$sections = get_theme_mod( 'illdy_frontpage_sections', $defaults );
+
 		return $sections;
 	}
 }
@@ -549,7 +548,8 @@ if ( ! function_exists( 'illdy_get_section_position' ) ) {
 	function illdy_get_section_position( $key ) {
 		$sections = illdy_get_sections_position();
 		$position = array_search( $key, $sections );
-		$return = ($position + 1) * 10;
+		$return   = ( $position + 1 ) * 10;
+
 		return $return;
 	}
 }
@@ -560,6 +560,7 @@ if ( ! function_exists( 'illdy_is_jumbotron_image' ) ) {
 		if ( 'image' == $jumbotron_type ) {
 			return true;
 		}
+
 		return false;
 	}
 }
@@ -570,6 +571,7 @@ if ( ! function_exists( 'illdy_is_jumbotron_video' ) ) {
 		if ( 'video' == $jumbotron_type ) {
 			return true;
 		}
+
 		return false;
 	}
 }
@@ -580,6 +582,7 @@ if ( ! function_exists( 'illdy_is_jumbotron_slider' ) ) {
 		if ( 'slider' == $jumbotron_type ) {
 			return true;
 		}
+
 		return false;
 	}
 }
@@ -587,7 +590,7 @@ if ( ! function_exists( 'illdy_is_jumbotron_slider' ) ) {
 if ( ! function_exists( 'illdy_is_jumbotron_slider_autoplay' ) ) {
 	function illdy_is_jumbotron_slider_autoplay() {
 		$jumbotron_type = get_theme_mod( 'illdy_jumbotron_background_type', 'image' );
-		$autoplay = get_theme_mod( 'illdy_jumbotron_slider_autoplay', true );
+		$autoplay       = get_theme_mod( 'illdy_jumbotron_slider_autoplay', true );
 		if ( 'slider' != $jumbotron_type ) {
 			return false;
 		}
@@ -600,16 +603,16 @@ if ( ! function_exists( 'illdy_is_jumbotron_slider_autoplay' ) ) {
 	}
 }
 
-
 function illdy_sanitize_background_repeat( $value, $setting ) {
-	if ( ! in_array( $value, array( 'repeat-x', 'repeat-y', 'repeat', 'no-repeat' ) ) ) {
+	if ( ! in_array( $value, [ 'repeat-x', 'repeat-y', 'repeat', 'no-repeat' ] ) ) {
 		return new WP_Error( 'invalid_value', __( 'Invalid value for background repeat.', 'illdy' ) );
 	}
+
 	return $value;
 }
 
 function illdy_sanitize_background_preset( $value, $setting ) {
-	if ( ! in_array( $value, array( 'default', 'fill', 'fit', 'repeat', 'custom' ), true ) ) {
+	if ( ! in_array( $value, [ 'default', 'fill', 'fit', 'repeat', 'custom' ], true ) ) {
 		return new WP_Error( 'invalid_value', __( 'Invalid value for background size.', 'illdy' ) );
 	}
 
@@ -617,9 +620,10 @@ function illdy_sanitize_background_preset( $value, $setting ) {
 }
 
 function illdy_sanitize_background_size( $value, $setting ) {
-	if ( ! in_array( $value, array( 'auto', 'contain', 'cover' ), true ) ) {
+	if ( ! in_array( $value, [ 'auto', 'contain', 'cover' ], true ) ) {
 		return new WP_Error( 'invalid_value', __( 'Invalid value for background size.', 'illdy' ) );
 	}
+
 	return $value;
 }
 
@@ -634,312 +638,37 @@ function illdy_print_customizer_templates() {
 	//Jumbotron Template
 	?>
 
-	<script id="illdy-jumbotron-section" type="text/x-handlebars-template">
-		{{#if illdy_jumbotron_general_image }}
-			#header{ background-image: url({{illdy_jumbotron_general_image}}) !important; }
-		{{else}}
-			#header{ background-image: none !important; }
-		{{/if}}
-		{{#if illdy_jumbotron_background_position_y }}
-			#header{ background-position-y: {{illdy_jumbotron_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_jumbotron_background_position_x }}
-			#header{ background-position-x: {{illdy_jumbotron_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_jumbotron_background_attachment }}
-			#header{ background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_jumbotron_background_repeat }}
-			#header{ background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_jumbotron_background_size }}
-			#header{ background-size: {{illdy_jumbotron_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_jumbotron_general_color }}
-			#header{ background-color: {{illdy_jumbotron_general_color}}; }
-		{{/if}}
-		{{#if illdy_jumbotron_first_button_background }}
-			#header .bottom-header .header-button-one{ background-color: {{illdy_jumbotron_first_button_background}}; }
-		{{/if}}
-		{{#if illdy_jumbotron_first_button_background_hover }}
-			#header .bottom-header .header-button-one:hover{ background-color: {{illdy_jumbotron_first_button_background_hover}}; }
-		{{/if}}
-		{{#if illdy_jumbotron_first_border_color }}
-			#header .bottom-header .header-button-one{ border-color: {{illdy_jumbotron_first_border_color}}; }
-		{{/if}}
-		{{#if illdy_jumbotron_second_button_background }}
-			#header .bottom-header .header-button-two{ background-color: {{illdy_jumbotron_second_button_background}}; }
-		{{/if}}
-		{{#if  illdy_jumbotron_second_button_background_hover }}
-			#header .bottom-header .header-button-two:hover{ background-color: {{illdy_jumbotron_second_button_background_hover}}; }
-		{{/if}}
-		{{#if  illdy_jumbotron_title_color }}
-			#header .bottom-header h1{ color: {{illdy_jumbotron_title_color}}; }
-		{{/if}}
-		{{#if  illdy_jumbotron_points_color }}
-			#header .bottom-header span.span-dot{ color: {{illdy_jumbotron_points_color}}; }
-		{{/if}}
-		{{#if  illdy_jumbotron_descriptions_color }}
-			#header .bottom-header .section-description{ color: {{illdy_jumbotron_descriptions_color}}; }
-		{{/if}}
-		{{#if  illdy_jumbotron_first_button_color }}
-			#header .bottom-header .header-button-one{ color: {{illdy_jumbotron_first_button_color}}; }
-		{{/if}}
-		{{#if  illdy_jumbotron_right_button_color }}
-			#header .bottom-header .header-button-two{ color: {{illdy_jumbotron_right_button_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-jumbotron-section" type="text/x-handlebars-template">
+        {{#if illdy_jumbotron_general_image }}            #header{ background-image: url({{illdy_jumbotron_general_image}}) !important; }        {{else}}            #header{ background-image: none !important; }        {{/if}}        {{#if illdy_jumbotron_background_position_y }}            #header{ background-position-y: {{illdy_jumbotron_background_position_y}} !important; }        {{/if}}        {{#if illdy_jumbotron_background_position_x }}            #header{ background-position-x: {{illdy_jumbotron_background_position_x}} !important; }        {{/if}}        {{#if illdy_jumbotron_background_attachment }}            #header{ background-attachment: scroll !important; }        {{/if}}        {{#if illdy_jumbotron_background_repeat }}            #header{ background-repeat: repeat !important; }        {{/if}}        {{#if illdy_jumbotron_background_size }}            #header{ background-size: {{illdy_jumbotron_background_size}} !important; }        {{/if}}        {{#if illdy_jumbotron_general_color }}            #header{ background-color: {{illdy_jumbotron_general_color}}; }        {{/if}}        {{#if illdy_jumbotron_first_button_background }}            #header .bottom-header .header-button-one{ background-color: {{illdy_jumbotron_first_button_background}}; }        {{/if}}        {{#if illdy_jumbotron_first_button_background_hover }}            #header .bottom-header .header-button-one:hover{ background-color: {{illdy_jumbotron_first_button_background_hover}}; }        {{/if}}        {{#if illdy_jumbotron_first_border_color }}            #header .bottom-header .header-button-one{ border-color: {{illdy_jumbotron_first_border_color}}; }        {{/if}}        {{#if illdy_jumbotron_second_button_background }}            #header .bottom-header .header-button-two{ background-color: {{illdy_jumbotron_second_button_background}}; }        {{/if}}        {{#if  illdy_jumbotron_second_button_background_hover }}            #header .bottom-header .header-button-two:hover{ background-color: {{illdy_jumbotron_second_button_background_hover}}; }        {{/if}}        {{#if  illdy_jumbotron_title_color }}            #header .bottom-header h1{ color: {{illdy_jumbotron_title_color}}; }        {{/if}}        {{#if  illdy_jumbotron_points_color }}            #header .bottom-header span.span-dot{ color: {{illdy_jumbotron_points_color}}; }        {{/if}}        {{#if  illdy_jumbotron_descriptions_color }}            #header .bottom-header .section-description{ color: {{illdy_jumbotron_descriptions_color}}; }        {{/if}}        {{#if  illdy_jumbotron_first_button_color }}            #header .bottom-header .header-button-one{ color: {{illdy_jumbotron_first_button_color}}; }        {{/if}}        {{#if  illdy_jumbotron_right_button_color }}            #header .bottom-header .header-button-two{ color: {{illdy_jumbotron_right_button_color}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-latestnews-section" type="text/x-handlebars-template">
-		{{#if illdy_latest_news_general_image }}
-			#latest-news{ background-image: url({{illdy_latest_news_general_image}}) !important; }
-		{{/if}}
-		{{#if illdy_latest_news_background_position_y }}
-			#latest-news{ background-position-y: {{illdy_latest_news_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_latest_news_background_position_x }}
-			#latest-news{ background-position-x: {{illdy_latest_news_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_latest_news_background_attachment }}
-			#latest-news{ background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_latest_news_background_repeat }}
-			#latest-news{ background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_latest_news_background_size }}
-			#latest-news{ background-size: {{illdy_latest_news_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_latest_news_general_color }}
-			#latest-news{ background-color: {{illdy_latest_news_general_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_title_color }}
-			#latest-news .section-header h3 { color: {{illdy_latest_news_title_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_descriptions_color }}
-			#latest-news .section-header .section-description { color: {{illdy_latest_news_descriptions_color}}; }
-		{{/if}}
-		{{#if illdy_latest_news_button_background }}
-			#latest-news .latest-news-button { background-color: {{illdy_latest_news_button_background}}; }
-		{{/if}}
-		{{#if illdy_latest_news_button_background_hover }}
-			#latest-news .latest-news-button:hover { background-color: {{illdy_latest_news_button_background_hover}}; }
-		{{/if}}
-		{{#if illdy_latest_news_button_color }}
-			#latest-news .latest-news-button { color: {{illdy_latest_news_button_color}}; }
-		{{/if}}
-		{{#if illdy_latest_news_post_bakground_color }}
-			#latest-news .section-content .post{ background-color: {{illdy_latest_news_post_bakground_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_post_text_color }}
-			#latest-news .section-content .post .post-title { color: {{illdy_latest_news_post_text_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_post_text_hover_color }}
-			#latest-news .section-content .post .post-title:hover { color: {{illdy_latest_news_post_text_hover_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_post_content_color }}
-			#latest-news .section-content .post .post-entry { color: {{illdy_latest_news_post_content_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_post_button_color }}
-			#latest-news .section-content .post .post-button { color: {{illdy_latest_news_post_button_color}}; }
-		{{/if}}
-		{{#if  illdy_latest_news_post_button_hover_color }}
-			#latest-news .section-content .post .post-button:hover { color: {{illdy_latest_news_post_button_hover_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-latestnews-section" type="text/x-handlebars-template">
+        {{#if illdy_latest_news_general_image }}            #latest-news{ background-image: url({{illdy_latest_news_general_image}}) !important; }        {{/if}}        {{#if illdy_latest_news_background_position_y }}            #latest-news{ background-position-y: {{illdy_latest_news_background_position_y}} !important; }        {{/if}}        {{#if illdy_latest_news_background_position_x }}            #latest-news{ background-position-x: {{illdy_latest_news_background_position_x}} !important; }        {{/if}}        {{#if illdy_latest_news_background_attachment }}            #latest-news{ background-attachment: scroll !important; }        {{/if}}        {{#if illdy_latest_news_background_repeat }}            #latest-news{ background-repeat: repeat !important; }        {{/if}}        {{#if illdy_latest_news_background_size }}            #latest-news{ background-size: {{illdy_latest_news_background_size}} !important; }        {{/if}}        {{#if illdy_latest_news_general_color }}            #latest-news{ background-color: {{illdy_latest_news_general_color}}; }        {{/if}}        {{#if  illdy_latest_news_title_color }}            #latest-news .section-header h3 { color: {{illdy_latest_news_title_color}}; }        {{/if}}        {{#if  illdy_latest_news_descriptions_color }}            #latest-news .section-header .section-description { color: {{illdy_latest_news_descriptions_color}}; }        {{/if}}        {{#if illdy_latest_news_button_background }}            #latest-news .latest-news-button { background-color: {{illdy_latest_news_button_background}}; }        {{/if}}        {{#if illdy_latest_news_button_background_hover }}            #latest-news .latest-news-button:hover { background-color: {{illdy_latest_news_button_background_hover}}; }        {{/if}}        {{#if illdy_latest_news_button_color }}            #latest-news .latest-news-button { color: {{illdy_latest_news_button_color}}; }        {{/if}}        {{#if illdy_latest_news_post_bakground_color }}            #latest-news .section-content .post{ background-color: {{illdy_latest_news_post_bakground_color}}; }        {{/if}}        {{#if  illdy_latest_news_post_text_color }}            #latest-news .section-content .post .post-title { color: {{illdy_latest_news_post_text_color}}; }        {{/if}}        {{#if  illdy_latest_news_post_text_hover_color }}            #latest-news .section-content .post .post-title:hover { color: {{illdy_latest_news_post_text_hover_color}}; }        {{/if}}        {{#if  illdy_latest_news_post_content_color }}            #latest-news .section-content .post .post-entry { color: {{illdy_latest_news_post_content_color}}; }        {{/if}}        {{#if  illdy_latest_news_post_button_color }}            #latest-news .section-content .post .post-button { color: {{illdy_latest_news_post_button_color}}; }        {{/if}}        {{#if  illdy_latest_news_post_button_hover_color }}            #latest-news .section-content .post .post-button:hover { color: {{illdy_latest_news_post_button_hover_color}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-fullwidth-section" type="text/x-handlebars-template">
-		{{#if illdy_full_width_general_image }}
-			#full-width:before { background-image: url({{illdy_full_width_general_image}}) !important; }
-		{{/if}}
-		{{#if illdy_full-width_background_position_y }}
-			#full-width:before { background-position-y: {{illdy_full-width_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_full-width_background_position_x }}
-			#full-width:before { background-position-x: {{illdy_full-width_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_full_width_background_attachment }}
-			#full-width:before { background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_full_width_background_repeat }}
-			#full-width:before { background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_full_width_background_size }}
-			#full-width:before { background-size: {{illdy_full_width_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_full_width_general_color }}
-			#full-width:before { background-color: {{illdy_full_width_general_color}}; }
-		{{/if}}
-		{{#if  illdy_full_width_title_color }}
-			#full-width .section-header h3 { color: {{illdy_full_width_title_color}}; }
-		{{/if}}
-		{{#if  illdy_full_width_descriptions_color }}
-			#full-width .section-header .section-description { color: {{illdy_full_width_descriptions_color}}; }
-		{{/if}}
-		{{#if  illdy_full_width_descriptions_color }}
-			#full-width .top-parallax-section h1, #full-width .top-parallax-section p { color: {{illdy_full_width_full_text}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-fullwidth-section" type="text/x-handlebars-template">
+        {{#if illdy_full_width_general_image }}            #full-width:before { background-image: url({{illdy_full_width_general_image}}) !important; }        {{/if}}        {{#if illdy_full-width_background_position_y }}            #full-width:before { background-position-y: {{illdy_full-width_background_position_y}} !important; }        {{/if}}        {{#if illdy_full-width_background_position_x }}            #full-width:before { background-position-x: {{illdy_full-width_background_position_x}} !important; }        {{/if}}        {{#if illdy_full_width_background_attachment }}            #full-width:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_full_width_background_repeat }}            #full-width:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_full_width_background_size }}            #full-width:before { background-size: {{illdy_full_width_background_size}} !important; }        {{/if}}        {{#if illdy_full_width_general_color }}            #full-width:before { background-color: {{illdy_full_width_general_color}}; }        {{/if}}        {{#if  illdy_full_width_title_color }}            #full-width .section-header h3 { color: {{illdy_full_width_title_color}}; }        {{/if}}        {{#if  illdy_full_width_descriptions_color }}            #full-width .section-header .section-description { color: {{illdy_full_width_descriptions_color}}; }        {{/if}}        {{#if  illdy_full_width_descriptions_color }}            #full-width .top-parallax-section h1, #full-width .top-parallax-section p { color: {{illdy_full_width_full_text}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-about-section" type="text/x-handlebars-template">
-		{{#if illdy_about_general_image }}
-			#about:before { background-image: url({{illdy_about_general_image}}) !important; }
-		{{/if}}
-		{{#if illdy_about_background_position_y }}
-			#about:before { background-position-y: {{illdy_about_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_about_background_position_x }}
-			#about:before { background-position-x: {{illdy_about_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_about_background_attachment }}
-			#about:before { background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_about_background_repeat }}
-			#about:before { background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_about_background_size }}
-			#about:before { background-size: {{illdy_about_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_about_general_color }}
-			#about:before { background-color: {{illdy_about_general_color}}; }
-		{{/if}}
-		{{#if  illdy_about_title_color }}
-			#about .section-header h3 { color: {{illdy_about_title_color}}; }
-		{{/if}}
-		{{#if  illdy_about_descriptions_color }}
-			#about .section-header .section-description { color: {{illdy_about_descriptions_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-about-section" type="text/x-handlebars-template">
+        {{#if illdy_about_general_image }}            #about:before { background-image: url({{illdy_about_general_image}}) !important; }        {{/if}}        {{#if illdy_about_background_position_y }}            #about:before { background-position-y: {{illdy_about_background_position_y}} !important; }        {{/if}}        {{#if illdy_about_background_position_x }}            #about:before { background-position-x: {{illdy_about_background_position_x}} !important; }        {{/if}}        {{#if illdy_about_background_attachment }}            #about:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_about_background_repeat }}            #about:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_about_background_size }}            #about:before { background-size: {{illdy_about_background_size}} !important; }        {{/if}}        {{#if illdy_about_general_color }}            #about:before { background-color: {{illdy_about_general_color}}; }        {{/if}}        {{#if  illdy_about_title_color }}            #about .section-header h3 { color: {{illdy_about_title_color}}; }        {{/if}}        {{#if  illdy_about_descriptions_color }}            #about .section-header .section-description { color: {{illdy_about_descriptions_color}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-projects-section" type="text/x-handlebars-template">
-		{{#if illdy_projects_general_image }}
-			#projects:before { background-image: url({{illdy_projects_general_image}}) !important; }
-		{{/if}}
-		{{#if illdy_projects_background_position_y }}
-			#projects:before { background-position-y: {{illdy_projects_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_projects_background_position_x }}
-			#projects:before { background-position-x: {{illdy_projects_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_projects_background_attachment }}
-			#projects:before { background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_projects_background_repeat }}
-			#projects:before { background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_projects_background_size }}
-			#projects:before { background-size: {{illdy_projects_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_projects_general_color }}
-			#projects:before { background-color: {{illdy_projects_general_color}}; }
-		{{/if}}
-		{{#if  illdy_projects_title_color }}
-			#projects .section-header h3 { color: {{illdy_projects_title_color}}; }
-		{{/if}}
-		{{#if  illdy_projects_descriptions_color }}
-			#projects .section-header .section-description { color: {{illdy_projects_descriptions_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-projects-section" type="text/x-handlebars-template">
+        {{#if illdy_projects_general_image }}            #projects:before { background-image: url({{illdy_projects_general_image}}) !important; }        {{/if}}        {{#if illdy_projects_background_position_y }}            #projects:before { background-position-y: {{illdy_projects_background_position_y}} !important; }        {{/if}}        {{#if illdy_projects_background_position_x }}            #projects:before { background-position-x: {{illdy_projects_background_position_x}} !important; }        {{/if}}        {{#if illdy_projects_background_attachment }}            #projects:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_projects_background_repeat }}            #projects:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_projects_background_size }}            #projects:before { background-size: {{illdy_projects_background_size}} !important; }        {{/if}}        {{#if illdy_projects_general_color }}            #projects:before { background-color: {{illdy_projects_general_color}}; }        {{/if}}        {{#if  illdy_projects_title_color }}            #projects .section-header h3 { color: {{illdy_projects_title_color}}; }        {{/if}}        {{#if  illdy_projects_descriptions_color }}            #projects .section-header .section-description { color: {{illdy_projects_descriptions_color}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-services-section" type="text/x-handlebars-template">
-		{{#if illdy_services_general_image }}
-			#services:before { background-image: url({{illdy_services_general_image}}) !important; }
-		{{/if}}
-		{{#if illdy_services_background_position_y }}
-			#services:before { background-position-y: {{illdy_services_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_services_background_position_x }}
-			#services:before { background-position-x: {{illdy_services_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_services_background_attachment }}
-			#services:before { background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_services_background_repeat }}
-			#services:before { background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_services_background_size }}
-			#services:before { background-size: {{illdy_services_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_services_general_color }}
-			#services:before { background-color: {{illdy_services_general_color}}; }
-		{{/if}}
-		{{#if  illdy_services_title_color }}
-			#services .section-header h3 { color: {{illdy_services_title_color}}; }
-		{{/if}}
-		{{#if  illdy_services_descriptions_color }}
-			#services .section-header .section-description { color: {{illdy_services_descriptions_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-services-section" type="text/x-handlebars-template">
+        {{#if illdy_services_general_image }}            #services:before { background-image: url({{illdy_services_general_image}}) !important; }        {{/if}}        {{#if illdy_services_background_position_y }}            #services:before { background-position-y: {{illdy_services_background_position_y}} !important; }        {{/if}}        {{#if illdy_services_background_position_x }}            #services:before { background-position-x: {{illdy_services_background_position_x}} !important; }        {{/if}}        {{#if illdy_services_background_attachment }}            #services:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_services_background_repeat }}            #services:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_services_background_size }}            #services:before { background-size: {{illdy_services_background_size}} !important; }        {{/if}}        {{#if illdy_services_general_color }}            #services:before { background-color: {{illdy_services_general_color}}; }        {{/if}}        {{#if  illdy_services_title_color }}            #services .section-header h3 { color: {{illdy_services_title_color}}; }        {{/if}}        {{#if  illdy_services_descriptions_color }}            #services .section-header .section-description { color: {{illdy_services_descriptions_color}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-team-section" type="text/x-handlebars-template">
-		{{#if illdy_team_general_image }}
-			#team:before { background-image: url({{illdy_team_general_image}}) !important; }
-		{{/if}}
-		{{#if illdy_team_background_position_y }}
-			#team:before { background-position-y: {{illdy_team_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_team_background_position_x }}
-			#team:before { background-position-x: {{illdy_team_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_team_background_attachment }}
-			#team:before { background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_team_background_repeat }}
-			#team:before { background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_team_background_size }}
-			#team:before { background-size: {{illdy_team_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_team_general_color }}
-			#team:before { background-color: {{illdy_team_general_color}}; }
-		{{/if}}
-		{{#if  illdy_team_title_color }}
-			#team .section-header h3 { color: {{illdy_team_title_color}}; }
-		{{/if}}
-		{{#if  illdy_team_descriptions_color }}
-			#team .section-header .section-description { color: {{illdy_team_descriptions_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-team-section" type="text/x-handlebars-template">
+        {{#if illdy_team_general_image }}            #team:before { background-image: url({{illdy_team_general_image}}) !important; }        {{/if}}        {{#if illdy_team_background_position_y }}            #team:before { background-position-y: {{illdy_team_background_position_y}} !important; }        {{/if}}        {{#if illdy_team_background_position_x }}            #team:before { background-position-x: {{illdy_team_background_position_x}} !important; }        {{/if}}        {{#if illdy_team_background_attachment }}            #team:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_team_background_repeat }}            #team:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_team_background_size }}            #team:before { background-size: {{illdy_team_background_size}} !important; }        {{/if}}        {{#if illdy_team_general_color }}            #team:before { background-color: {{illdy_team_general_color}}; }        {{/if}}        {{#if  illdy_team_title_color }}            #team .section-header h3 { color: {{illdy_team_title_color}}; }        {{/if}}        {{#if  illdy_team_descriptions_color }}            #team .section-header .section-description { color: {{illdy_team_descriptions_color}}; }        {{/if}}
+    </script>
 
-	<script id="illdy-testimonials-section" type="text/x-handlebars-template">
-		{{#if illdy_testimonials_general_background_image }}
-			#testimonials:before { background-image: url({{illdy_testimonials_general_background_image}}) !important; }
-		{{/if}}
-		{{#if illdy_testimonials_background_position_y }}
-			#testimonials:before { background-position-y: {{illdy_testimonials_background_position_y}} !important; }
-		{{/if}}
-		{{#if illdy_testimonials_background_position_x }}
-			#testimonials:before { background-position-x: {{illdy_testimonials_background_position_x}} !important; }
-		{{/if}}
-		{{#if illdy_testimonials_background_attachment }}
-			#testimonials:before { background-attachment: scroll !important; }
-		{{/if}}
-		{{#if illdy_testimonials_background_repeat }}
-			#testimonials:before { background-repeat: repeat !important; }
-		{{/if}}
-		{{#if illdy_testimonials_background_size }}
-			#testimonials:before { background-size: {{illdy_testimonials_background_size}} !important; }
-		{{/if}}
-		{{#if illdy_testimonials_general_color }}
-			#testimonials:before { background-color: {{illdy_testimonials_general_color}}; }
-		{{/if}}
-		{{#if  illdy_testimonials_title_color }}
-			#testimonials .section-header h3 { color: {{illdy_testimonials_title_color}}; }
-		{{/if}}
-		{{#if  illdy_testimonials_author_text_color }}
-			#testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-meta { color: {{illdy_testimonials_author_text_color}}; }
-		{{/if}}
-		{{#if  illdy_testimonials_text_color }}
-			#testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-content blockquote { color: {{illdy_testimonials_text_color}}; }
-		{{/if}}
-		{{#if  illdy_testimonials_container_background_color }}
-			#testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-content { background-color: {{illdy_testimonials_container_background_color}}; }
-			#testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-content:after { border-color: {{illdy_testimonials_container_background_color}} transparent transparent transparent; }
-		{{/if}}
-		{{#if  illdy_testimonials_dots_color }}
-			#testimonials .section-content .testimonials-carousel .owl-controls .owl-dots .owl-dot:hover, #testimonials .section-content .testimonials-carousel .owl-controls .owl-dots .owl-dot.active { border-color: {{illdy_testimonials_dots_color}}; }
-			#testimonials .section-content .testimonials-carousel .owl-controls .owl-dots .owl-dot { background-color: {{illdy_testimonials_dots_color}}; }
-		{{/if}}
-	</script>
+    <script id="illdy-testimonials-section" type="text/x-handlebars-template">
+        {{#if illdy_testimonials_general_background_image }}            #testimonials:before { background-image: url({{illdy_testimonials_general_background_image}}) !important; }        {{/if}}        {{#if illdy_testimonials_background_position_y }}            #testimonials:before { background-position-y: {{illdy_testimonials_background_position_y}} !important; }        {{/if}}        {{#if illdy_testimonials_background_position_x }}            #testimonials:before { background-position-x: {{illdy_testimonials_background_position_x}} !important; }        {{/if}}        {{#if illdy_testimonials_background_attachment }}            #testimonials:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_testimonials_background_repeat }}            #testimonials:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_testimonials_background_size }}            #testimonials:before { background-size: {{illdy_testimonials_background_size}} !important; }        {{/if}}        {{#if illdy_testimonials_general_color }}            #testimonials:before { background-color: {{illdy_testimonials_general_color}}; }        {{/if}}        {{#if  illdy_testimonials_title_color }}            #testimonials .section-header h3 { color: {{illdy_testimonials_title_color}}; }        {{/if}}        {{#if  illdy_testimonials_author_text_color }}            #testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-meta { color: {{illdy_testimonials_author_text_color}}; }        {{/if}}        {{#if  illdy_testimonials_text_color }}            #testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-content blockquote { color: {{illdy_testimonials_text_color}}; }        {{/if}}        {{#if  illdy_testimonials_container_background_color }}            #testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-content { background-color: {{illdy_testimonials_container_background_color}}; }            #testimonials .section-content .testimonials-carousel .carousel-testimonial .testimonial-content:after { border-color: {{illdy_testimonials_container_background_color}} transparent transparent transparent; }        {{/if}}        {{#if  illdy_testimonials_dots_color }}            #testimonials .section-content .testimonials-carousel .owl-controls .owl-dots .owl-dot:hover, #testimonials .section-content .testimonials-carousel .owl-controls .owl-dots .owl-dot.active { border-color: {{illdy_testimonials_dots_color}}; }            #testimonials .section-content .testimonials-carousel .owl-controls .owl-dots .owl-dot { background-color: {{illdy_testimonials_dots_color}}; }        {{/if}}
+    </script>
 
 	<?php
 

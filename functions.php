@@ -36,29 +36,29 @@ if ( ! function_exists( 'illdy_setup' ) ) {
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'custom-logo', array(
+		add_theme_support( 'custom-logo', [
 			'height'      => 75,
 			'flex-height' => false,
 			'flex-width'  => true,
-		) );
-		add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
-		add_theme_support( 'custom-header', array(
-			'default-image'     => esc_url( get_template_directory_uri() . '/layout/images/blog/blog-header.png' ),
-			'width'             => 1920,
-			'height'            => 532,
-			'flex-height'       => true,
-			'flex-width'        => true,
-			'random-default'    => true,
-			'header-text'       => false,
-		) );
+		] );
+		add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ] );
+		add_theme_support( 'custom-header', [
+			'default-image'  => esc_url( get_template_directory_uri() . '/layout/images/blog/blog-header.png' ),
+			'width'          => 1920,
+			'height'         => 532,
+			'flex-height'    => true,
+			'flex-width'     => true,
+			'random-default' => true,
+			'header-text'    => false,
+		] );
 		add_theme_support( 'customize-selective-refresh-widgets' );
-		register_default_headers( array(
-			'default' => array(
+		register_default_headers( [
+			'default' => [
 				'url'           => '%s/layout/images/blog/blog-header.png',
 				'thumbnail_url' => '%s/layout/images/blog/blog-header.png',
 				'description'   => __( 'Coffe', 'illdy' ),
-			),
-		) );
+			],
+		] );
 
 		// Add Image Size
 		add_image_size( 'illdy-blog-list', 750, 500, true );
@@ -70,9 +70,9 @@ if ( ! function_exists( 'illdy_setup' ) ) {
 		add_image_size( 'illdy-front-page-person', 125, 125, true );
 
 		// Register Nav Menus
-		register_nav_menus( array(
+		register_nav_menus( [
 			'primary-menu' => __( 'Primary Menu', 'illdy' ),
-		) );
+		] );
 
 		/**
 		 *  Back compatible
@@ -82,12 +82,10 @@ if ( ! function_exists( 'illdy_setup' ) ) {
 		/*******************************************/
 		/*************  Welcome screen *************/
 		/*******************************************/
-
 	}
 
 	// Add Editor Style
 	add_editor_style( 'illdy-google-fonts' );
-
 }// End if().
 
 if ( ! function_exists( 'illdy_is_not_latest_posts' ) ) {
@@ -109,10 +107,8 @@ if ( ! function_exists( 'illdy_is_not_imported' ) ) {
 		} else {
 			return true;
 		}
-
 	}
 }
-
 
 /**
  *    Set the content width in pixels, based on the theme's design and stylesheet.
@@ -137,32 +133,31 @@ if ( ! function_exists( 'illdy_enqueue_stylesheets' ) ) {
 	function illdy_enqueue_stylesheets() {
 
 		// Google Fonts
-		$google_fonts_args = array(
+		$google_fonts_args = [
 			'family' => 'Source+Sans+Pro:400,900,700,300,300italic|Lato:300,400,700,900|Poppins:300,400,500,600,700',
-		);
+		];
 
 		// WP Register Style
-		wp_register_style( 'illdy-google-fonts', add_query_arg( $google_fonts_args, 'https://fonts.googleapis.com/css' ), array(), null );
+		wp_register_style( 'illdy-google-fonts', add_query_arg( $google_fonts_args, 'https://fonts.googleapis.com/css' ), [], null );
 
 		// WP Enqueue Style
 		if ( 1 == get_theme_mod( 'illdy_preloader_enable', 1 ) && ! is_customize_preview() ) {
-			wp_enqueue_style( 'illdy-pace', get_template_directory_uri() . '/layout/css/pace.min.css', array(), '', 'all' );
+			wp_enqueue_style( 'illdy-pace', get_template_directory_uri() . '/layout/css/lib/pace.min.css', [], '', 'all' );
 		}
 
 		wp_enqueue_style( 'illdy-google-fonts' );
-		wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/layout/css/bootstrap.min.css', array(), '3.3.6', 'all' );
-		wp_enqueue_style( 'bootstrap-theme', get_template_directory_uri() . '/layout/css/bootstrap-theme.min.css', array(), '3.3.6', 'all' );
-		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/layout/css/font-awesome.min.css', array(), '4.5.0', 'all' );
-		wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/layout/css/owl-carousel.min.css', array(), '2.0.0', 'all' );
+		wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/layout/css/lib/bootstrap.min.css', [], '3.3.6', 'all' );
+		wp_enqueue_style( 'bootstrap-theme', get_template_directory_uri() . '/layout/css/lib/bootstrap-theme.min.css', [], '3.3.6', 'all' );
+		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/layout/css/lib/font-awesome.min.css', [], '4.5.0', 'all' );
+		wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/layout/css/lib/owl-carousel.min.css', [], '2.0.0', 'all' );
 		if ( get_theme_mod( 'illdy_projects_lightbox', 0 ) == 1 ) {
-			wp_enqueue_style( 'illdy-fancybox', get_template_directory_uri() . '/layout/css/jquery.fancybox.css', array(), '', 'all' );
+			wp_enqueue_style( 'illdy-fancybox', get_template_directory_uri() . '/layout/css/lib/jquery.fancybox.min.css', [], '', 'all' );
 		}
-		wp_enqueue_style( 'illdy-main', get_template_directory_uri() . '/layout/css/main.min.css', array(), '', 'all' );
-		wp_enqueue_style( 'illdy-custom', get_template_directory_uri() . '/layout/css/custom.min.css', array(), '', 'all' );
-		wp_enqueue_style( 'illdy-style', get_stylesheet_uri(), array(), '1.0.16', 'all' );
+		wp_enqueue_style( 'illdy-main', get_template_directory_uri() . '/layout/css/main.css', [], '', 'all' );
+		wp_enqueue_style( 'illdy-custom', get_template_directory_uri() . '/layout/css/custom.css', [], '', 'all' );
+		wp_enqueue_style( 'illdy-style', get_stylesheet_uri(), [], '1.0.16', 'all' );
 	}
 }
-
 
 /**
  *    WP Enqueue JavaScripts
@@ -172,25 +167,29 @@ if ( ! function_exists( 'illdy_enqueue_javascripts' ) ) {
 
 	function illdy_enqueue_javascripts() {
 		if ( get_theme_mod( 'illdy_preloader_enable', 1 ) == 1 ) {
-			wp_enqueue_script( 'illdy-pace', get_template_directory_uri() . '/layout/js/pace/pace.min.js', array( 'jquery' ), '', false );
-			$pace_options = array(
+			wp_enqueue_script( 'illdy-pace', get_template_directory_uri() . '/layout/js/lib/pace.min.js', [ 'jquery' ], '', false );
+			$pace_options = [
 				'restartOnRequestAfter' => 0,
-				'restartOnPushState' => 0,
-			);
+				'restartOnPushState'    => 0,
+			];
 			wp_localize_script( 'illdy-pace', 'paceOptions', $pace_options );
 		}
-		wp_enqueue_script( 'jquery-ui-progressbar', '', array( 'jquery' ), '', true );
-		wp_enqueue_script( 'illdy-bootstrap', get_template_directory_uri() . '/layout/js/bootstrap/bootstrap.min.js', array( 'jquery' ), '3.3.6', true );
-		wp_enqueue_script( 'illdy-owl-carousel', get_template_directory_uri() . '/layout/js/owl-carousel/owl-carousel.min.js', array( 'jquery' ), '2.0.0', true );
-		wp_enqueue_script( 'illdy-count-to', get_template_directory_uri() . '/layout/js/count-to/count-to.min.js', array( 'jquery' ), '', true );
-		wp_enqueue_script( 'illdy-visible', get_template_directory_uri() . '/layout/js/visible/visible.min.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'jquery-ui-progressbar', '', [ 'jquery' ], '', true );
+		wp_enqueue_script( 'illdy-bootstrap', get_template_directory_uri() . '/layout/js/lib/bootstrap.min.js', [ 'jquery' ], '3.3.6', true );
+		wp_enqueue_script( 'illdy-owl-carousel', get_template_directory_uri() . '/layout/js/lib/owl-carousel.min.js', [ 'jquery' ], '2.0.0', true );
+		wp_enqueue_script( 'illdy-count-to', get_template_directory_uri() . '/layout/js/lib/count-to.min.js', [
+			'jquery',
+		], '', true );
+		wp_enqueue_script( 'illdy-visible', get_template_directory_uri() . '/layout/js/lib/visible.min.js', [ 'jquery' ], '', true );
 		if ( get_theme_mod( 'illdy_projects_lightbox', 0 ) == 1 ) {
-			wp_enqueue_script( 'illdy-fancybox', get_template_directory_uri() . '/layout/js/jquery.fancybox.js', array( 'jquery' ), '', true );
+			wp_enqueue_script( 'illdy-fancybox', get_template_directory_uri() . '/layout/js/lib/jquery.fancybox.min.js', [ 'jquery' ], '', true );
 			wp_add_inline_script( 'illdy-fancybox', 'jQuery(".fancybox").fancybox();' );
 		}
-		wp_enqueue_script( 'illdy-parallax', get_template_directory_uri() . '/layout/js/parallax/parallax.min.js', array( 'jquery' ), '1.0.16', true );
-		wp_enqueue_script( 'illdy-plugins', get_template_directory_uri() . '/layout/js/plugins.min.js', array( 'jquery' ), '1.0.16', true );
-		wp_enqueue_script( 'illdy-scripts', get_template_directory_uri() . '/layout/js/scripts.min.js', array( 'jquery' ), '1.0.16', true );
+		wp_enqueue_script( 'illdy-parallax', get_template_directory_uri() . '/layout/js/lib/parallax.min.js', [
+			'jquery',
+		], '1.0.16', true );
+		wp_enqueue_script( 'illdy-plugins', get_template_directory_uri() . '/layout/js/plugins.min.js', [ 'jquery' ], '1.0.16', true );
+		wp_enqueue_script( 'illdy-scripts', get_template_directory_uri() . '/layout/js/scripts.min.js', [ 'jquery' ], '1.0.16', true );
 		if ( is_front_page() ) {
 			wp_add_inline_script( 'illdy-scripts', 'if( jQuery(\'.blog-carousel > .illdy-blog-post\').length > 3 ){jQuery(\'.blog-carousel\').owlCarousel({\'items\': 3,\'loop\': true,\'dots\': false,\'nav\' : true, \'navText\':[\'<i class="fa fa-angle-left" aria-hidden="true"></i>\',\'<i class="fa fa-angle-right" aria-hidden="true"></i>\'], responsive : { 0 : { items : 1 }, 480 : { items : 2 }, 900 : { items : 3 } }});}' );
 			$jumbotron_type = get_theme_mod( 'illdy_jumbotron_background_type', 'image' );
@@ -206,7 +205,6 @@ if ( ! function_exists( 'illdy_enqueue_javascripts' ) ) {
 	}
 }
 
-
 /**
  *    Widgets
  */
@@ -216,7 +214,7 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 	function illdy_widgets() {
 
 		// Blog Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Blog Sidebar', 'illdy' ),
 			'id'            => 'blog-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in blog page.', 'illdy' ),
@@ -224,10 +222,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// Page Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Page Sidebar', 'illdy' ),
 			'id'            => 'page-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear on single pages.', 'illdy' ),
@@ -235,10 +233,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// Footer Sidebar 1
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Footer Sidebar 1', 'illdy' ),
 			'id'            => 'footer-sidebar-1',
 			'description'   => __( 'The widgets added in this sidebar will appear in first block from footer.', 'illdy' ),
@@ -246,10 +244,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// Footer Sidebar 2
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Footer Sidebar 2', 'illdy' ),
 			'id'            => 'footer-sidebar-2',
 			'description'   => __( 'The widgets added in this sidebar will appear in second block from footer.', 'illdy' ),
@@ -257,10 +255,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// Footer Sidebar 3
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Footer Sidebar 3', 'illdy' ),
 			'id'            => 'footer-sidebar-3',
 			'description'   => __( 'The widgets added in this sidebar will appear in third block from footer.', 'illdy' ),
@@ -268,10 +266,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// Footer Sidebar 4
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Footer Sidebar 4', 'illdy' ),
 			'id'            => 'footer-sidebar-4',
 			'description'   => __( 'The widgets added in this sidebar will appear in fourth block from footer.', 'illdy' ),
@@ -279,10 +277,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// About Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - About Sidebar', 'illdy' ),
 			'id'            => 'front-page-about-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in about section from front page.', 'illdy' ),
@@ -290,10 +288,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
-		) );
+		] );
 
 		// Projects Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - Projects Sidebar', 'illdy' ),
 			'id'            => 'front-page-projects-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in projects section from front page.', 'illdy' ),
@@ -301,10 +299,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
-		) );
+		] );
 
 		// Services Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - Services Sidebar', 'illdy' ),
 			'id'            => 'front-page-services-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in services section from front page.', 'illdy' ),
@@ -312,10 +310,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
-		) );
+		] );
 
 		// Counter Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - Counter Sidebar', 'illdy' ),
 			'id'            => 'front-page-counter-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in counter section from front page.', 'illdy' ),
@@ -323,10 +321,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
-		) );
+		] );
 
 		// Team Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - Team Sidebar', 'illdy' ),
 			'id'            => 'front-page-team-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in team section from front page.', 'illdy' ),
@@ -334,10 +332,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
-		) );
+		] );
 
 		// Full Width
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - Full Width Section', 'illdy' ),
 			'id'            => 'front-page-full-width-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in full width section from front page.', 'illdy' ),
@@ -345,10 +343,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '<div class="widget-title"><h5>',
 			'after_title'   => '</h5></div>',
-		) );
+		] );
 
 		// Testimonial Sidebar
-		register_sidebar( array(
+		register_sidebar( [
 			'name'          => __( 'Front page - Testimonials Sidebar', 'illdy' ),
 			'id'            => 'front-page-testimonials-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in testimonials section from front page.', 'illdy' ),
@@ -356,11 +354,11 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_widget'  => '</div>',
 			'before_title'  => '',
 			'after_title'   => '',
-		) );
+		] );
 
 		// WooCommerce Sidebar
 		if ( class_exists( 'WooCommerce' ) ) {
-			register_sidebar( array(
+			register_sidebar( [
 				'name'          => __( 'WooCommerce Sidebar', 'illdy' ),
 				'id'            => 'woocommerce-sidebar',
 				'description'   => __( 'The widgets added in this sidebar will appear in WooCommerce pages.', 'illdy' ),
@@ -368,11 +366,10 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 				'after_widget'  => '</div>',
 				'before_title'  => '<div class="widget-title"><h5>',
 				'after_title'   => '</h5></div>',
-			) );
+			] );
 		}
 	}
 }// End if().
-
 
 /**
  *  Checkbox helper function
@@ -390,24 +387,24 @@ if ( ! function_exists( 'illdy_value_checkbox_helper' ) ) {
 add_action( 'illdy_after_content_above_footer', 'illdy_pagination', 1 );
 
 function illdy_pagination() {
-	the_posts_pagination( array(
+	the_posts_pagination( [
 		'prev_text'          => '<i class="fa fa-angle-left"></i>',
 		'next_text'          => '<i class="fa fa-angle-right"></i>',
 		'screen_reader_text' => '',
-	) );
+	] );
 }
-
 
 if ( ! function_exists( 'illdy_get_random_featured_image' ) ) {
 	function illdy_get_random_featured_image() {
-		$featured_image_list = array(
+		$featured_image_list = [
 			'random-blog-post-1.jpg',
 			'random-blog-post-2.jpg',
 			'random-blog-post-3.jpg',
 			'random-blog-post-4.jpg',
 			'random-blog-post-5.jpg',
-		);
-		$number = rand( 0,4 );
+		];
+		$number              = rand( 0, 4 );
+
 		return get_template_directory_uri() . '/layout/images/blog/' . $featured_image_list[ $number ];
 	}
 }
