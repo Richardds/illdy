@@ -29,18 +29,13 @@ $wp_customize->add_control( new Epsilon_Control_Tab( $wp_customize, $prefix . '_
 		[
 			'name'   => __( 'Details', 'illdy' ),
 			'fields' => [
-				$prefix . '_contact_bar_facebook_url',
-				$prefix . '_contact_bar_twitter_url',
-				$prefix . '_contact_bar_linkedin_url',
-				$prefix . '_contact_bar_googlep_url',
-				$prefix . '_contact_bar_pinterest_url',
-				$prefix . '_contact_bar_instagram_url',
-				$prefix . '_contact_bar_youtube_url',
-				$prefix . '_contact_bar_vimeo_url',
-				$prefix . '_email',
-				$prefix . '_phone',
 				$prefix . '_address1',
 				$prefix . '_address2',
+				$prefix . '_email',
+				$prefix . '_bank_name',
+				$prefix . '_bank_account_number',
+				$prefix . '_bank_account_iban',
+				$prefix . '_bank_account_swift_bic',
 			],
 		],
 	],
@@ -80,15 +75,18 @@ if ( get_theme_mod( $prefix . '_contact_us_entry' ) ) {
 
 	$wp_customize->add_setting( $prefix . '_contact_us_entry', [
 		'sanitize_callback' => 'wp_kses_post',
-		'default'           => __( 'And we will get in touch as soon as possible.', 'illdy' ),
+		'default'           => __( 'Meet the people that are going to take your business to the next level.', 'illdy' ),
 		'transport'         => 'postMessage',
 	] );
 	$wp_customize->add_control( new Epsilon_Control_Text_Editor( $wp_customize, $prefix . '_contact_us_entry', [
 		'label'    => __( 'Entry', 'illdy' ),
-		'section'  => $prefix . '_contact_us',
+		'section'  => $panel_id,
 		'priority' => 3,
 		'type'     => 'epsilon-text-editor',
 	] ) );
+	$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_entry', [
+		'selector' => '#contact-us .section-header .section-description',
+	] );
 } elseif ( ! defined( ILLDY_COMPANION ) ) {
 
 	$wp_customize->add_setting( $prefix . '_contact_us_entry', [
@@ -99,14 +97,11 @@ if ( get_theme_mod( $prefix . '_contact_us_entry' ) ) {
 	$wp_customize->add_control( new Illdy_Text_Custom_Control( $wp_customize, $prefix . '_contact_us_entry', [
 		'label'       => __( 'Install Illdy Companion', 'illdy' ),
 		'description' => sprintf( __( 'In order to edit description please install <a href="%s" target="_blank">Illdy Companion</a>', 'illdy' ), illdy_get_recommended_actions_url() ),
-		'section'     => $prefix . '_contact_us',
+		'section'     => $panel_id,
 		'settings'    => $prefix . '_contact_us_entry',
 		'priority'    => 3,
 	] ) );
 }
-$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_entry', [
-	'selector' => '#contact-us .section-header .section-description',
-] );
 
 // Address Title
 $wp_customize->add_setting( $prefix . '_contact_us_general_address_title', [
@@ -123,19 +118,34 @@ $wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_ad
 	'selector' => '#contact-us .section-content .row .col-sm-4 .box-left',
 ] );
 
-// Customer Support Title
-$wp_customize->add_setting( $prefix . '_contact_us_general_customer_support_title', [
+// E-Mail Title
+$wp_customize->add_setting( $prefix . '_contact_us_general_email_title', [
 	'sanitize_callback' => 'illdy_sanitize_html',
-	'default'           => __( 'Customer Support', 'illdy' ),
+	'default'           => __( 'E-Mail', 'illdy' ),
 	'transport'         => 'postMessage',
 ] );
-$wp_customize->add_control( $prefix . '_contact_us_general_customer_support_title', [
-	'label'    => __( 'Customer Support Title', 'illdy' ),
+$wp_customize->add_control( $prefix . '_contact_us_general_email_title', [
+	'label'    => __( 'E-Mail Title', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
 	'priority' => 5,
 ] );
-$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_customer_support_title', [
-	'selector' => '#contact-us .section-content .row .col-sm-5 .box-left',
+$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_email_title', [
+	'selector' => '#contact-us .section-content .row .col-sm-4 .box-left',
+] );
+
+// Bank Title
+$wp_customize->add_setting( $prefix . '_contact_us_general_bank_title', [
+	'sanitize_callback' => 'illdy_sanitize_html',
+	'default'           => __( 'Bank', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_contact_us_general_bank_title', [
+	'label'    => __( 'Bank Title', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'priority' => 6,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_bank_title', [
+	'selector' => '#contact-us .section-content .row .col-sm-4 .box-left',
 ] );
 
 // Contact Form 7
@@ -145,7 +155,7 @@ $wp_customize->add_setting( 'illdy_contact_us_general_contact_form_7', [
 $wp_customize->add_control( new Illdy_CF7_Custom_Control( $wp_customize, 'illdy_contact_us_general_contact_form_7', [
 	'label'    => __( 'Select the contact form you\'d like to display (powered by Contact Form 7)', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 6,
+	'priority' => 7,
 	'type'     => 'illdy_contact_form_7',
 ] ) );
 
@@ -174,7 +184,7 @@ $wp_customize->add_control( new Illdy_Text_Custom_Control( $wp_customize, $prefi
 	'description'     => sprintf( '%s %s', __( 'Create a contact form from ', 'illdy' ), '<a href="' . admin_url( 'admin.php?page=wpcf7-new' ) . '" title="Contact Form 7" target="_blank">here</a>' ),
 	'section'         => $prefix . '_contact_us',
 	'settings'        => $prefix . '_contact_us_create_contact_form_7',
-	'priority'        => 7,
+	'priority'        => 8,
 	'active_callback' => 'illdy_have_not_contact_form_7',
 ] ) );
 
@@ -182,172 +192,19 @@ $wp_customize->add_control( new Illdy_Text_Custom_Control( $wp_customize, $prefi
 /************** Contact Details  ***************/
 /***********************************************/
 
-/* Facebook URL */
-$wp_customize->add_setting( 'illdy_contact_bar_facebook_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( 'illdy_contact_bar_facebook_url', [
-	'label'    => __( 'Facebook URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => 'illdy_contact_bar_facebook_url',
-	'priority' => 10,
-] );
-
-$wp_customize->selective_refresh->add_partial( $prefix . '_contact_bar_facebook_url', [
-	'selector'        => '#contact-us .contact-us-social',
-	'render_callback' => $prefix . '_contact_us_social',
-] );
-
-/* Twitter URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_twitter_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_twitter_url', [
-	'label'    => __( 'Twitter URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_twitter_url',
-	'priority' => 10,
-] );
-
-/* LinkedIN URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_linkedin_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_linkedin_url', [
-	'label'    => __( 'LinkedIN URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_linkedin_url',
-	'priority' => 10,
-] );
-
-/* Google+ URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_googlep_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_googlep_url', [
-	'label'    => __( 'Google+ URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_googlep_url',
-	'priority' => 10,
-] );
-
-/* Pinterest URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_pinterest_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_pinterest_url', [
-	'label'    => __( 'Pinterest URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_pinterest_url',
-	'priority' => 10,
-] );
-
-/* Instagram URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_instagram_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_instagram_url', [
-	'label'    => __( 'Instagram URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_instagram_url',
-	'priority' => 10,
-] );
-
-/* YouTube URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_youtube_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_youtube_url', [
-	'label'    => __( 'YouTube URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_youtube_url',
-	'priority' => 10,
-] );
-
-/* Vimeo URL */
-$wp_customize->add_setting( $prefix . '_contact_bar_vimeo_url', [
-	'sanitize_callback' => 'esc_url_raw',
-	'default'           => esc_url_raw( '#' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_contact_bar_vimeo_url', [
-	'label'    => __( 'Vimeo URL', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_contact_bar_vimeo_url',
-	'priority' => 10,
-] );
-
-/* email */
-$wp_customize->add_setting( $prefix . '_email', [
-	'sanitize_callback' => 'sanitize_text_field',
-	'default'           => __( 'contact@site.com', 'illdy' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_email', [
-	'label'    => __( 'Email addr.', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_email',
-	'priority' => 10,
-] );
-$wp_customize->selective_refresh->add_partial( $prefix . '_email', [
-	'selector'        => '#contact-us .section-content .row .col-sm-5 .box-right span:first-child',
-	'render_callback' => $prefix . '_email',
-] );
-
-/* phone number */
-$wp_customize->add_setting( $prefix . '_phone', [
-	'sanitize_callback' => 'illdy_sanitize_html',
-	'default'           => __( '(555) 555-5555', 'illdy' ),
-	'transport'         => 'postMessage',
-] );
-
-$wp_customize->add_control( $prefix . '_phone', [
-	'label'    => __( 'Phone number', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'settings' => $prefix . '_phone',
-	'priority' => 12,
-] );
-$wp_customize->selective_refresh->add_partial( $prefix . '_phone', [
-	'selector' => '#contact-us .section-content .row .col-sm-5 .box-right span:nth-child(2)',
-] );
-
 // Address 1
 $wp_customize->add_setting( $prefix . '_address1', [
 	'sanitize_callback' => 'illdy_sanitize_html',
 	'default'           => __( 'Street 221B Baker Street, ', 'illdy' ),
 	'transport'         => 'postMessage',
 ] );
-
 $wp_customize->add_control( $prefix . '_address1', [
 	'label'    => __( 'Address 1', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 13,
+	'priority' => 2,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_address1', [
-	'selector' => '#contact-us .section-content .row .col-sm-4 .box-right span:first-child',
+	'selector' => '#contact-us .contact-us-address .box-right span:first-child',
 ] );
 
 // Address 2
@@ -356,13 +213,93 @@ $wp_customize->add_setting( $prefix . '_address2', [
 	'default'           => __( 'London, UK', 'illdy' ),
 	'transport'         => 'postMessage',
 ] );
-
 $wp_customize->add_control( $prefix . '_address2', [
 	'label'    => __( 'Address 2', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 13,
+	'priority' => 3,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_address2', [
-	'selector'        => '#contact-us .section-content .row .col-sm-4 .box-right span:nth-child(2)',
+	'selector'        => '#contact-us .contact-us-address .box-right span:nth-child(2)',
 	'render_callback' => $prefix . '_address2',
+] );
+
+/* email */
+$wp_customize->add_setting( $prefix . '_email', [
+	'sanitize_callback' => 'sanitize_text_field',
+	'default'           => __( 'contact@site.com', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_email', [
+	'label'    => __( 'E-Mail address', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'settings' => $prefix . '_email',
+	'priority' => 1,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_email', [
+	'selector'        => '#contact-us .contact-us-email .box-right span:first-child',
+	'render_callback' => $prefix . '_email',
+] );
+
+// Bank name
+$wp_customize->add_setting( $prefix . '_bank_name', [
+	'sanitize_callback' => 'illdy_sanitize_html',
+	'default'           => __( 'Bank', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_bank_name', [
+	'label'    => __( 'Bank name', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'priority' => 4,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_bank_name', [
+	'selector'        => '#contact-us .contact-us-bank .box-right span:first-child',
+	'render_callback' => $prefix . '_bank_name',
+] );
+
+// Account number
+$wp_customize->add_setting( $prefix . '_bank_account_number', [
+	'sanitize_callback' => 'illdy_sanitize_html',
+	'default'           => __( '0000000000/0000', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_bank_account_number', [
+	'label'    => __( 'Account number', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'priority' => 5,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_number', [
+	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(2)',
+	'render_callback' => $prefix . '_bank_account_number',
+] );
+
+// IBAN
+$wp_customize->add_setting( $prefix . '_bank_account_iban', [
+	'sanitize_callback' => 'illdy_sanitize_html',
+	'default'           => __( 'XX0000000000000000000000', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_bank_account_iban', [
+	'label'    => __( 'IBAN', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'priority' => 6,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_iban', [
+	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(3)',
+	'render_callback' => $prefix . '_bank_account_iban',
+] );
+
+// SWIFT/BIC
+$wp_customize->add_setting( $prefix . '_bank_account_swift_bic', [
+	'sanitize_callback' => 'illdy_sanitize_html',
+	'default'           => __( 'ABCDXXYYZZZ', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_bank_account_swift_bic', [
+	'label'    => __( 'SWIFT/BIC', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'priority' => 7,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_swift_bic', [
+	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(4)',
+	'render_callback' => $prefix . '_bank_account_swift_bic',
 ] );

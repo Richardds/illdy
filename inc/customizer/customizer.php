@@ -144,6 +144,9 @@ if ( ! function_exists( 'illdy_customize_register' ) ) {
 		// Projects
 		require_once get_template_directory() . '/inc/customizer/panels/projects.php';
 
+		// Sponsors
+		require_once get_template_directory() . '/inc/customizer/panels/sponsors.php';
+
 		// Services
 		require_once get_template_directory() . '/inc/customizer/panels/services.php';
 
@@ -316,7 +319,8 @@ if ( ! function_exists( 'illdy_create_contact_tab_sections' ) ) {
 			$prefix . '_contact_us_general_title',
 			$prefix . '_contact_us_entry',
 			$prefix . '_contact_us_general_address_title',
-			$prefix . '_contact_us_general_customer_support_title',
+			$prefix . '_contact_us_general_email_title',
+			$prefix . '_contact_us_general_bank_title',
 		];
 
 		if ( illdy_is_not_active_contact_form_7() ) {
@@ -400,15 +404,15 @@ if ( ! function_exists( 'illdy_contact_us_general_address_title' ) ) {
 	}
 }
 
-if ( ! function_exists( 'illdy_contact_us_general_customer_support_title' ) ) {
-	function illdy_contact_us_general_customer_support_title() {
-		return get_theme_mode( 'illdy_contact_us_general_customer_support_title' );
+if ( ! function_exists( 'illdy_contact_us_general_email_title' ) ) {
+	function illdy_contact_us_general_email_title() {
+		return get_theme_mode( 'illdy_contact_us_general_email_title' );
 	}
 }
 
-if ( ! function_exists( 'illdy_address2' ) ) {
-	function illdy_address2() {
-		return get_theme_mode( 'illdy_address2' );
+if ( ! function_exists( 'illdy_contact_us_general_bank_title' ) ) {
+	function illdy_contact_us_general_bank_title() {
+		return get_theme_mode( 'illdy_contact_us_general_bank_title' );
 	}
 }
 
@@ -418,15 +422,39 @@ if ( ! function_exists( 'illdy_address1' ) ) {
 	}
 }
 
-if ( ! function_exists( 'illdy_phone' ) ) {
-	function illdy_phone() {
-		return get_theme_mode( 'illdy_phone' );
+if ( ! function_exists( 'illdy_address2' ) ) {
+	function illdy_address2() {
+		return get_theme_mode( 'illdy_address2' );
 	}
 }
 
 if ( ! function_exists( 'illdy_email' ) ) {
 	function illdy_email() {
 		return get_theme_mode( 'illdy_email' );
+	}
+}
+
+if ( ! function_exists( 'illdy_bank_name' ) ) {
+	function illdy_bank_name() {
+		return get_theme_mode( 'illdy_bank_name' );
+	}
+}
+
+if ( ! function_exists( 'illdy_bank_account_number' ) ) {
+	function illdy_bank_account_number() {
+		return get_theme_mode( 'illdy_bank_account_number' );
+	}
+}
+
+if ( ! function_exists( 'illdy_bank_account_iban' ) ) {
+	function illdy_bank_account_iban() {
+		return get_theme_mode( 'illdy_bank_account_iban' );
+	}
+}
+
+if ( ! function_exists( 'illdy_bank_account_swift_bic' ) ) {
+	function illdy_bank_account_swift_bic() {
+		return get_theme_mode( 'illdy_bank_account_swift_bic' );
 	}
 }
 
@@ -530,6 +558,7 @@ if ( ! function_exists( 'illdy_get_sections_position' ) ) {
 		$defaults = [
 			'illdy_panel_about',
 			'illdy_panel_projects',
+			'illdy_panel_sponsors',
 			'illdy_testimonials_general',
 			'illdy_panel_services',
 			'illdy_latest_news_general',
@@ -656,6 +685,10 @@ function illdy_print_customizer_templates() {
 
     <script id="illdy-projects-section" type="text/x-handlebars-template">
         {{#if illdy_projects_general_image }}            #projects:before { background-image: url({{illdy_projects_general_image}}) !important; }        {{/if}}        {{#if illdy_projects_background_position_y }}            #projects:before { background-position-y: {{illdy_projects_background_position_y}} !important; }        {{/if}}        {{#if illdy_projects_background_position_x }}            #projects:before { background-position-x: {{illdy_projects_background_position_x}} !important; }        {{/if}}        {{#if illdy_projects_background_attachment }}            #projects:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_projects_background_repeat }}            #projects:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_projects_background_size }}            #projects:before { background-size: {{illdy_projects_background_size}} !important; }        {{/if}}        {{#if illdy_projects_general_color }}            #projects:before { background-color: {{illdy_projects_general_color}}; }        {{/if}}        {{#if  illdy_projects_title_color }}            #projects .section-header h3 { color: {{illdy_projects_title_color}}; }        {{/if}}        {{#if  illdy_projects_descriptions_color }}            #projects .section-header .section-description { color: {{illdy_projects_descriptions_color}}; }        {{/if}}
+    </script>
+
+    <script id="illdy-sponsors-section" type="text/x-handlebars-template">
+        {{#if illdy_sponsors_general_image }}            #sponsors:before { background-image: url({{illdy_sponsors_general_image}}) !important; }        {{/if}}        {{#if illdy_sponsors_background_position_y }}            #sponsors:before { background-position-y: {{illdy_sponsors_background_position_y}} !important; }        {{/if}}        {{#if illdy_sponsors_background_position_x }}            #sponsors:before { background-position-x: {{illdy_sponsors_background_position_x}} !important; }        {{/if}}        {{#if illdy_sponsors_background_attachment }}            #sponsors:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_sponsors_background_repeat }}            #sponsors:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_sponsors_background_size }}            #sponsors:before { background-size: {{illdy_sponsors_background_size}} !important; }        {{/if}}        {{#if illdy_sponsors_general_color }}            #sponsors:before { background-color: {{illdy_sponsors_general_color}}; }        {{/if}}        {{#if  illdy_sponsors_title_color }}            #sponsors .section-header h3 { color: {{illdy_sponsors_title_color}}; }        {{/if}}        {{#if  illdy_sponsors_descriptions_color }}            #sponsors .section-header .section-description { color: {{illdy_sponsors_descriptions_color}}; }        {{/if}}
     </script>
 
     <script id="illdy-services-section" type="text/x-handlebars-template">

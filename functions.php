@@ -134,7 +134,7 @@ if ( ! function_exists( 'illdy_enqueue_stylesheets' ) ) {
 
 		// Google Fonts
 		$google_fonts_args = [
-			'family' => 'Source+Sans+Pro:400,900,700,300,300italic|Lato:300,400,700,900|Poppins:300,400,500,600,700',
+			'family' => 'Source+Sans+Pro:400,900,700,300,300italic|Nunito:300,400,700,900|Poppins:300,400,500,600,700',
 		];
 
 		// WP Register Style
@@ -295,6 +295,17 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'name'          => __( 'Front page - Projects Sidebar', 'illdy' ),
 			'id'            => 'front-page-projects-sidebar',
 			'description'   => __( 'The widgets added in this sidebar will appear in projects section from front page.', 'illdy' ),
+			'before_widget' => '<div id="%1$s" class="col-sm-3 col-xs-6 no-padding %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '',
+			'after_title'   => '',
+		] );
+
+		// Sponsors Sidebar
+		register_sidebar( [
+			'name'          => __( 'Front page - Sponsors Sidebar', 'illdy' ),
+			'id'            => 'front-page-sponsors-sidebar',
+			'description'   => __( 'The widgets added in this sidebar will appear in sponsors section from front page.', 'illdy' ),
 			'before_widget' => '<div id="%1$s" class="col-sm-3 col-xs-6 no-padding %2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '',

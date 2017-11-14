@@ -152,20 +152,27 @@ if ( version_compare( $theme->version, '1.0.36', '>=' ) ) {
 		remove_theme_mod( 'illdy_contact_us_title' );
 	}
 
-	//Adress Title
+	// Adress Title
 	$address_title = get_theme_mod( 'illdy_contact_us_address_title' );
 	if ( $address_title ) {
 		set_theme_mod( 'illdy_contact_us_general_address_title', $address_title );
 		remove_theme_mod( 'illdy_contact_us_address_title' );
 	}
 
-	//Support Title
-	$support_title = get_theme_mod( 'illdy_contact_us_customer_support_title' );
-	if ( $support_title ) {
-		set_theme_mod( 'illdy_contact_us_general_customer_support_title', $support_title );
-		remove_theme_mod( 'illdy_contact_us_customer_support_title' );
+	// E-Mail Title
+	$email_title = get_theme_mod( 'illdy_contact_us_email_title' );
+	if ( $email_title ) {
+		set_theme_mod( 'illdy_contact_us_general_email_title', $email_title );
+		remove_theme_mod( 'illdy_contact_us_email_title' );
 	}
-}// End if().
+
+	// Bank Title
+	$bank_title = get_theme_mod( 'illdy_contact_us_bank_title' );
+	if ( $bank_title ) {
+		set_theme_mod( 'illdy_contact_us_general_bank_title', $bank_title );
+		remove_theme_mod( 'illdy_contact_us_bank_title' );
+	}
+}
 
 if ( is_admin() ) {
 	$color_scheme = get_theme_mod( 'illdy_color_scheme' );

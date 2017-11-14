@@ -47,39 +47,58 @@
 		} );
 	} );
 
-	/* email */
-	wp.customize( 'illdy_email', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contact-us .section-content .contact-us-box .box-right span a' ).attr( 'href', 'mailto: ' + newval );
-			$( '#contact-us .section-content .contact-us-box .box-right span a' ).attr( 'title', newval );
-			$( '#contact-us .section-content .contact-us-box .box-right span a' ).text( newval );
-		} );
-	} );
+    // Address 1
+    wp.customize( 'illdy_address1', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-address-1"]' ).html( newval );
+        } );
+    } );
 
-	/* phone number */
-	wp.customize( 'illdy_phone', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-phone"]' ).attr( 'href', 'tel:' + newval );
-			$( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-phone"]' ).attr( 'title', newval );
-			$( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-phone"]' ).text( 'Phone: ' + newval );
-		} );
-	} );
+    // Address 1
+    wp.customize( 'illdy_address2', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-address-2"]' ).html( newval );
+        } );
+    } );
 
-	// Address 1
-	wp.customize( 'illdy_address1', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-address-1"]' ).html( newval );
-		} );
-	} );
+    /* email */
+    wp.customize( 'illdy_email', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span a' ).attr( 'href', 'mailto: ' + newval );
+            $( '#contact-us .section-content .contact-us-box .box-right span a' ).attr( 'title', newval );
+            $( '#contact-us .section-content .contact-us-box .box-right span a' ).text( newval );
+        } );
+    } );
 
-	// Address 1
-	wp.customize( 'illdy_address2', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-address-2"]' ).html( newval );
-		} );
-	} );
+    // Bank name
+    wp.customize( 'illdy_bank_name', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-name"]' ).html( newval );
+        } );
+    } );
 
-	/* Footer Image Logo */
+    // Account number
+    wp.customize( 'illdy_bank_account_number', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-account-number"]' ).html( newval );
+        } );
+    } );
+
+    // Account IBAN
+    wp.customize( 'illdy_bank_account_iban', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-account-iban"]' ).html( newval );
+        } );
+    } );
+
+    // Account SWIFT/BIC
+    wp.customize( 'illdy_bank_account_swift_bic', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-account-swift-bic"]' ).html( newval );
+        } );
+    } );
+
+    /* Footer Image Logo */
 	wp.customize( 'illdy_img_footer_logo', function( value ) {
 		value.bind( function( newval ) {
 			if( newval !== '' ) {
@@ -200,17 +219,6 @@
 			}
 		} );
 	} );
-
-	// Image
-	// wp.customize( 'illdy_jumbotron_general_image', function( value ) {
-	// 	value.bind( function( newval ) {
-	// 		if( newval == '' ) {
-	// 			$( '#header.header-front-page' ).removeAttr( 'style' );
-	// 		} else {
-	// 			$( '#header.header-front-page' ).css( 'background-image', 'url('+ newval +')' );
-	// 		}
-	// 	} );
-	// } );
 
 	// First word from title
 	wp.customize( 'illdy_jumbotron_general_first_row_from_title', function( value ) {
@@ -533,12 +541,19 @@
 		} );
 	} );
 
-	// Customer Support Title
-	wp.customize( 'illdy_contact_us_general_customer_support_title', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contact-us .section-content .contact-us-box .box-left[data-customizer="box-left-customer-support-title"]' ).html( newval );
-		} );
-	} );
+    // E-Mail Title
+    wp.customize( 'illdy_contact_us_general_email_title', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-left[data-customizer="box-left-email-title"]' ).html( newval );
+        } );
+    } );
+
+    // Bank Title
+    wp.customize( 'illdy_contact_us_general_bank_title', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-box .box-left[data-customizer="box-left-bank-title"]' ).html( newval );
+        } );
+    } );
 
 	// Color scheme
 	wp.customize.bind('preview-ready', function () {
