@@ -145,25 +145,18 @@ if ( version_compare( $theme->version, '1.0.36', '>=' ) ) {
 		remove_theme_mod( 'illdy_jumbotron_general_third_row_from_title' );
 	}
 
-	// Contact US Title
+	// Contact us Title
 	$contacus_title = get_theme_mod( 'illdy_contact_us_title' );
 	if ( $contacus_title ) {
 		set_theme_mod( 'illdy_contact_us_general_title', $contacus_title );
 		remove_theme_mod( 'illdy_contact_us_title' );
 	}
 
-	// Adress Title
-	$address_title = get_theme_mod( 'illdy_contact_us_address_title' );
-	if ( $address_title ) {
-		set_theme_mod( 'illdy_contact_us_general_address_title', $address_title );
-		remove_theme_mod( 'illdy_contact_us_address_title' );
-	}
-
-	// E-Mail Title
-	$email_title = get_theme_mod( 'illdy_contact_us_email_title' );
-	if ( $email_title ) {
-		set_theme_mod( 'illdy_contact_us_general_email_title', $email_title );
-		remove_theme_mod( 'illdy_contact_us_email_title' );
+	// Contact Title
+	$contact_title = get_theme_mod( 'illdy_contact_us_contact_title' );
+	if ( $contact_title ) {
+		set_theme_mod( 'illdy_contact_us_general_contact_title', $contact_title );
+		remove_theme_mod( 'illdy_contact_us_contact_title' );
 	}
 
 	// Bank Title

@@ -47,54 +47,59 @@
 		} );
 	} );
 
+    // Name
+    wp.customize( 'illdy_name', function( value ) {
+        value.bind( function( newval ) {
+            $( '#contact-us .section-content .contact-us-contact .box-right span[data-customizer="contact-us-name"]' ).html( newval );
+        } );
+    } );
+
     // Address 1
     wp.customize( 'illdy_address1', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-address-1"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-contact .box-right span[data-customizer="contact-us-address-1"]' ).html( newval );
         } );
     } );
 
     // Address 1
     wp.customize( 'illdy_address2', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-address-2"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-contact .box-right span[data-customizer="contact-us-address-2"]' ).html( newval );
         } );
     } );
 
     /* email */
     wp.customize( 'illdy_email', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span a' ).attr( 'href', 'mailto: ' + newval );
-            $( '#contact-us .section-content .contact-us-box .box-right span a' ).attr( 'title', newval );
-            $( '#contact-us .section-content .contact-us-box .box-right span a' ).text( newval );
+            $( '#contact-us .section-content .contact-us-contact .box-right span[data-customizer="contact-us-email"]' ).html( newval );
         } );
     } );
 
     // Bank name
     wp.customize( 'illdy_bank_name', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-name"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-bank .box-right span[data-customizer="contact-us-bank-name"]' ).html( newval );
         } );
     } );
 
     // Account number
     wp.customize( 'illdy_bank_account_number', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-account-number"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-bank .box-right span[data-customizer="contact-us-bank-account-number"]' ).html( newval );
         } );
     } );
 
     // Account IBAN
     wp.customize( 'illdy_bank_account_iban', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-account-iban"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-bank .box-right span[data-customizer="contact-us-bank-account-iban"]' ).html( newval );
         } );
     } );
 
     // Account SWIFT/BIC
     wp.customize( 'illdy_bank_account_swift_bic', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-right span[data-customizer="contact-us-bank-account-swift-bic"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-bank .box-right span[data-customizer="contact-us-bank-account-swift-bic"]' ).html( newval );
         } );
     } );
 
@@ -534,17 +539,10 @@
 		} );
 	} );
 
-	// Address Title
-	wp.customize( 'illdy_contact_us_general_address_title', function( value ) {
-		value.bind( function( newval ) {
-			$( '#contact-us .section-content .contact-us-box .box-left[data-customizer="box-left-address-title"]' ).html( newval );
-		} );
-	} );
-
-    // E-Mail Title
-    wp.customize( 'illdy_contact_us_general_email_title', function( value ) {
+    // Contact Title
+    wp.customize( 'illdy_contact_us_general_contact_title', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-box .box-left[data-customizer="box-left-email-title"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-box .box-left[data-customizer="box-left-contact-title"]' ).html( newval );
         } );
     } );
 

@@ -2671,7 +2671,8 @@ p.mb32 {
 
 	#team .section-content .person .person-content {
 		float: none;
-		width: 100%
+		width: 100%;
+		text-align: center;
 	}
 
 	.row.blog-carousel.owl-carousel {

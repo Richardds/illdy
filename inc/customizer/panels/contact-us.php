@@ -31,6 +31,7 @@ $wp_customize->add_control( new Epsilon_Control_Tab( $wp_customize, $prefix . '_
 			'fields' => [
 				$prefix . '_address1',
 				$prefix . '_address2',
+				$prefix . '_name',
 				$prefix . '_email',
 				$prefix . '_bank_name',
 				$prefix . '_bank_account_number',
@@ -103,33 +104,18 @@ if ( get_theme_mod( $prefix . '_contact_us_entry' ) ) {
 	] ) );
 }
 
-// Address Title
-$wp_customize->add_setting( $prefix . '_contact_us_general_address_title', [
+// Contact Title
+$wp_customize->add_setting( $prefix . '_contact_us_general_contact_title', [
 	'sanitize_callback' => 'illdy_sanitize_html',
-	'default'           => __( 'Address', 'illdy' ),
+	'default'           => __( 'Contact', 'illdy' ),
 	'transport'         => 'postMessage',
 ] );
-$wp_customize->add_control( $prefix . '_contact_us_general_address_title', [
-	'label'    => __( 'Address Title', 'illdy' ),
-	'section'  => $prefix . '_contact_us',
-	'priority' => 4,
-] );
-$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_address_title', [
-	'selector' => '#contact-us .section-content .row .col-sm-4 .box-left',
-] );
-
-// E-Mail Title
-$wp_customize->add_setting( $prefix . '_contact_us_general_email_title', [
-	'sanitize_callback' => 'illdy_sanitize_html',
-	'default'           => __( 'E-Mail', 'illdy' ),
-	'transport'         => 'postMessage',
-] );
-$wp_customize->add_control( $prefix . '_contact_us_general_email_title', [
-	'label'    => __( 'E-Mail Title', 'illdy' ),
+$wp_customize->add_control( $prefix . '_contact_us_general_contact_title', [
+	'label'    => __( 'Contact Title', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
 	'priority' => 5,
 ] );
-$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_email_title', [
+$wp_customize->selective_refresh->add_partial( $prefix . '_contact_us_general_contact_title', [
 	'selector' => '#contact-us .section-content .row .col-sm-4 .box-left',
 ] );
 
@@ -192,6 +178,21 @@ $wp_customize->add_control( new Illdy_Text_Custom_Control( $wp_customize, $prefi
 /************** Contact Details  ***************/
 /***********************************************/
 
+// Name
+$wp_customize->add_setting( $prefix . '_name', [
+	'sanitize_callback' => 'illdy_sanitize_html',
+	'default'           => __( 'Company', 'illdy' ),
+	'transport'         => 'postMessage',
+] );
+$wp_customize->add_control( $prefix . '_name', [
+	'label'    => __( 'Name', 'illdy' ),
+	'section'  => $prefix . '_contact_us',
+	'priority' => 1,
+] );
+$wp_customize->selective_refresh->add_partial( $prefix . '_name', [
+	'selector' => '#contact-us .contact-us-contact .box-right span:first-child',
+] );
+
 // Address 1
 $wp_customize->add_setting( $prefix . '_address1', [
 	'sanitize_callback' => 'illdy_sanitize_html',
@@ -204,7 +205,7 @@ $wp_customize->add_control( $prefix . '_address1', [
 	'priority' => 2,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_address1', [
-	'selector' => '#contact-us .contact-us-address .box-right span:first-child',
+	'selector' => '#contact-us .contact-us-contact .box-right span:nth-child(2)',
 ] );
 
 // Address 2
@@ -219,7 +220,7 @@ $wp_customize->add_control( $prefix . '_address2', [
 	'priority' => 3,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_address2', [
-	'selector'        => '#contact-us .contact-us-address .box-right span:nth-child(2)',
+	'selector'        => '#contact-us .contact-us-contact .box-right span:nth-child(3)',
 	'render_callback' => $prefix . '_address2',
 ] );
 
@@ -233,10 +234,10 @@ $wp_customize->add_control( $prefix . '_email', [
 	'label'    => __( 'E-Mail address', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
 	'settings' => $prefix . '_email',
-	'priority' => 1,
+	'priority' => 4,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_email', [
-	'selector'        => '#contact-us .contact-us-email .box-right span:first-child',
+	'selector'        => '#contact-us .contact-us-contact .box-right span:nth-child(4)',
 	'render_callback' => $prefix . '_email',
 ] );
 
@@ -249,7 +250,7 @@ $wp_customize->add_setting( $prefix . '_bank_name', [
 $wp_customize->add_control( $prefix . '_bank_name', [
 	'label'    => __( 'Bank name', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 4,
+	'priority' => 5,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_bank_name', [
 	'selector'        => '#contact-us .contact-us-bank .box-right span:first-child',
@@ -265,7 +266,7 @@ $wp_customize->add_setting( $prefix . '_bank_account_number', [
 $wp_customize->add_control( $prefix . '_bank_account_number', [
 	'label'    => __( 'Account number', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 5,
+	'priority' => 6,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_number', [
 	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(2)',
@@ -281,7 +282,7 @@ $wp_customize->add_setting( $prefix . '_bank_account_iban', [
 $wp_customize->add_control( $prefix . '_bank_account_iban', [
 	'label'    => __( 'IBAN', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 6,
+	'priority' => 7,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_iban', [
 	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(3)',
@@ -297,7 +298,7 @@ $wp_customize->add_setting( $prefix . '_bank_account_swift_bic', [
 $wp_customize->add_control( $prefix . '_bank_account_swift_bic', [
 	'label'    => __( 'SWIFT/BIC', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
-	'priority' => 7,
+	'priority' => 8,
 ] );
 $wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_swift_bic', [
 	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(4)',
