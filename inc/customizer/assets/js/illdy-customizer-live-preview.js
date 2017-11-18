@@ -82,10 +82,10 @@
         } );
     } );
 
-    // Account number
-    wp.customize( 'illdy_bank_account_number', function( value ) {
+    // ICO
+    wp.customize( 'illdy_ico', function( value ) {
         value.bind( function( newval ) {
-            $( '#contact-us .section-content .contact-us-bank .box-right span[data-customizer="contact-us-bank-account-number"]' ).html( newval );
+            $( '#contact-us .section-content .contact-us-bank .box-right span[data-customizer="contact-us-ico"]' ).html( newval );
         } );
     } );
 

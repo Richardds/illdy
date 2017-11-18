@@ -2662,7 +2662,7 @@ p.mb32 {
 	}
 }
 
-@media only screen and (min-width: 768px) and (max-width: 800px) {
+@media only screen and (min-width: 768px) and (max-width: 992px) {
 	#team .section-content .person .person-image {
 		float: none;
 		margin-right: auto;

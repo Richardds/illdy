@@ -34,7 +34,7 @@ $wp_customize->add_control( new Epsilon_Control_Tab( $wp_customize, $prefix . '_
 				$prefix . '_name',
 				$prefix . '_email',
 				$prefix . '_bank_name',
-				$prefix . '_bank_account_number',
+				$prefix . '_bank_ico',
 				$prefix . '_bank_account_iban',
 				$prefix . '_bank_account_swift_bic',
 			],
@@ -257,20 +257,20 @@ $wp_customize->selective_refresh->add_partial( $prefix . '_bank_name', [
 	'render_callback' => $prefix . '_bank_name',
 ] );
 
-// Account number
-$wp_customize->add_setting( $prefix . '_bank_account_number', [
+// ICO
+$wp_customize->add_setting( $prefix . '_ico', [
 	'sanitize_callback' => 'illdy_sanitize_html',
-	'default'           => __( '0000000000/0000', 'illdy' ),
+	'default'           => __( '00000000', 'illdy' ),
 	'transport'         => 'postMessage',
 ] );
-$wp_customize->add_control( $prefix . '_bank_account_number', [
-	'label'    => __( 'Account number', 'illdy' ),
+$wp_customize->add_control( $prefix . '_ico', [
+	'label'    => __( 'ICO', 'illdy' ),
 	'section'  => $prefix . '_contact_us',
 	'priority' => 6,
 ] );
-$wp_customize->selective_refresh->add_partial( $prefix . '_bank_account_number', [
+$wp_customize->selective_refresh->add_partial( $prefix . '_ico', [
 	'selector'        => '#contact-us .contact-us-bank .box-right span:nth-child(2)',
-	'render_callback' => $prefix . '_bank_account_number',
+	'render_callback' => $prefix . '_ico',
 ] );
 
 // IBAN

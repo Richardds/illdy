@@ -440,9 +440,9 @@ if ( ! function_exists( 'illdy_bank_name' ) ) {
 	}
 }
 
-if ( ! function_exists( 'illdy_bank_account_number' ) ) {
-	function illdy_bank_account_number() {
-		return get_theme_mode( 'illdy_bank_account_number' );
+if ( ! function_exists( 'illdy_ico' ) ) {
+	function illdy_ico() {
+		return get_theme_mode( 'illdy_ico' );
 	}
 }
 

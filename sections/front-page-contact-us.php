@@ -13,7 +13,7 @@ if ( current_user_can( 'edit_theme_options' ) ) {
 	$address2               = get_theme_mod( 'illdy_address2', __( 'London, UK', 'illdy' ) );
 	$email                  = get_theme_mod( 'illdy_email', __( 'contact@site.com', 'illdy' ) );
 	$bank_name              = get_theme_mod( 'illdy_bank_name', __( 'Bank', 'illdy' ) );
-	$bank_account_number    = get_theme_mod( 'illdy_bank_account_number', __( '0000000000/0000', 'illdy' ) );
+	$ico                    = get_theme_mod( 'illdy_ico', __( '00000000', 'illdy' ) );
 	$bank_account_iban      = get_theme_mod( 'illdy_bank_account_iban', __( 'XX0000000000000000000000', 'illdy' ) );
 	$bank_account_swift_bic = get_theme_mod( 'illdy_bank_account_swift_bic', __( 'ABCDXXYYZZZ', 'illdy' ) );
 	$general_title          = get_theme_mod( 'illdy_contact_us_general_title', __( 'Contact us', 'illdy' ) );
@@ -27,7 +27,7 @@ if ( current_user_can( 'edit_theme_options' ) ) {
 	$address2               = get_theme_mod( 'illdy_address2' );
 	$email                  = get_theme_mod( 'illdy_email' );
 	$bank_name              = get_theme_mod( 'illdy_bank_name' );
-	$bank_account_number    = get_theme_mod( 'illdy_bank_account_number' );
+	$ico                    = get_theme_mod( 'illdy_ico' );
 	$bank_account_iban      = get_theme_mod( 'illdy_bank_account_iban' );
 	$bank_account_swift_bic = get_theme_mod( 'illdy_bank_account_swift_bic' );
 	$general_title          = get_theme_mod( 'illdy_contact_us_general_title' );
@@ -37,7 +37,7 @@ if ( current_user_can( 'edit_theme_options' ) ) {
 	$general_bank_title     = get_theme_mod( 'illdy_contact_us_general_bank_title' );
 }
 
-if ( '' != $general_title || '' != $general_entry || '' != $general_bank_title || '' != $name || '' != $bank_name || '' != $bank_account_number || '' != $bank_account_iban || '' != $bank_account_swift_bic || '' != $address1 || '' != $address2 || '' != $general_email_title || '' != $email || null != $general_contact_form_7 && 'default' != $general_contact_form_7 ) {
+if ( '' != $general_title || '' != $general_entry || '' != $general_bank_title || '' != $general_contact_title || '' != $name || '' != $bank_name || '' != $ico || '' != $bank_account_iban || '' != $bank_account_swift_bic || '' != $address1 || '' != $address2 || '' != $email || null != $general_contact_form_7 && 'default' != $general_contact_form_7 ) {
 
 	?>
     <section id="contact-us" class="front-page-section">
@@ -101,9 +101,9 @@ if ( '' != $general_title || '' != $general_entry || '' != $general_bank_title |
                                             <span class="box-right-row" data-customizer="contact-us-bank-name">
                                                 <?=illdy_sanitize_html( $bank_name );?></span>
 										<?php endif; ?>
-										<?php if ( $bank_account_number ) : ?>
-                                            <span class="box-right-row" data-customizer="contact-us-account-number">
-                                                NO: <?=illdy_sanitize_html( $bank_account_number );?></span>
+										<?php if ( $ico ) : ?>
+                                            <span class="box-right-row" data-customizer="contact-us-ico">
+                                                IČO: <?=illdy_sanitize_html( $ico );?></span>
 										<?php endif; ?>
 										<?php if ( $bank_account_iban ) : ?>
                                             <span class="box-right-row" data-customizer="contact-us-account-iban">
