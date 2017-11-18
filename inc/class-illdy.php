@@ -142,7 +142,6 @@ class Illdy{
 		$front_page_sidebars = [
 			'front-page-about-sidebar',
 			'front-page-projects-sidebar',
-			'front-page-sponsors-sidebar',
 			'front-page-services-sidebar',
 			'front-page-counter-sidebar',
 			'front-page-team-sidebar',

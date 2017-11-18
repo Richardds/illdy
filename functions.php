@@ -301,17 +301,6 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_title'   => '',
 		] );
 
-		// Sponsors Sidebar
-		register_sidebar( [
-			'name'          => __( 'Front page - Sponsors Sidebar', 'illdy' ),
-			'id'            => 'front-page-sponsors-sidebar',
-			'description'   => __( 'The widgets added in this sidebar will appear in sponsors section from front page.', 'illdy' ),
-			'before_widget' => '<div id="%1$s" class="col-sm-3 col-xs-6 no-padding %2$s">',
-			'after_widget'  => '</div>',
-			'before_title'  => '',
-			'after_title'   => '',
-		] );
-
 		// Services Sidebar
 		register_sidebar( [
 			'name'          => __( 'Front page - Services Sidebar', 'illdy' ),
