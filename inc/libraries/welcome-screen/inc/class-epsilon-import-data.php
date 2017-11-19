@@ -239,8 +239,8 @@ class Epsilon_Import_Data{
 		 */
 		if ( 'post_meta' === $this->mode ) {
 			update_post_meta( Epsilon_Content_Backup::get_instance()->setting_page, $setting, [
-					$setting => $import,
-				] );
+				$setting => $import,
+			] );
 
 			return 'ok';
 		}
@@ -270,8 +270,8 @@ class Epsilon_Import_Data{
 		if ( 'post_meta' === $this->mode ) {
 			foreach ( $import as $k => $v ) {
 				update_post_meta( Epsilon_Content_Backup::get_instance()->setting_page, $k, [
-						$k => $v,
-					] );
+					$k => $v,
+				] );
 			}
 
 			return 'ok';
@@ -328,10 +328,10 @@ class Epsilon_Import_Data{
 		if ( 'posts' === $front ) {
 			update_option( 'show_on_front', 'page' );
 			$id = wp_insert_post( [
-					'post_title'  => __( 'Homepage', 'epsilon-framework' ),
-					'post_type'   => 'page',
-					'post_status' => 'publish',
-				] );
+				'post_title'  => __( 'Homepage', 'epsilon-framework' ),
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			] );
 			update_option( 'page_on_front', $id );
 		}
 

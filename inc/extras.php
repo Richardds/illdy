@@ -110,6 +110,7 @@ if ( ! function_exists( 'illdy_sections_show' ) ) {
 			'illdy_latest_news_general'  => 'illdy_latest_news_general_show',
 			'illdy_counter_general'      => 'illdy_counter_general_show',
 			'illdy_panel_team'           => 'illdy_team_general_show',
+			'illdy_panel_sponsors'       => 'illdy_sponsors_general_show',
 			'illdy_contact_us'           => 'illdy_contact_us_show',
 			'illdy_full_width'           => 'illdy_full_width_general_show',
 		];
@@ -133,6 +134,7 @@ if ( ! function_exists( 'illdy_sections' ) ) {
 			'illdy_latest_news_general'  => 'latest-news',
 			'illdy_counter_general'      => 'counter',
 			'illdy_panel_team'           => 'team',
+			'illdy_panel_sponsors'       => 'sponsors',
 			'illdy_contact_us'           => 'contact-us',
 			'illdy_full_width'           => 'full-width',
 		];
@@ -545,6 +547,52 @@ if ( ! function_exists( 'illdy_team_css' ) ) {
 		}
 		if ( $illdy_team_descriptions_color ) {
 			$css .= '#team .section-header .section-description {color: ' . esc_attr( $illdy_team_descriptions_color ) . ';}';
+		}
+
+		return $css;
+	}
+} // End if().
+
+if ( ! function_exists( 'illdy_sponsors_css' ) ) {
+	function illdy_sponsors_css() {
+
+		$illdy_sponsors_title_color           = get_theme_mod( 'illdy_sponsors_title_color' );
+		$illdy_sponsors_descriptions_color    = get_theme_mod( 'illdy_sponsors_descriptions_color' );
+		$illdy_sponsors_general_color         = get_theme_mod( 'illdy_sponsors_general_color' );
+		$illdy_sponsors_general_image         = get_theme_mod( 'illdy_sponsors_general_image' );
+		$illdy_sponsors_background_size       = get_theme_mod( 'illdy_sponsors_background_size' );
+		$illdy_sponsors_background_repeat     = get_theme_mod( 'illdy_sponsors_background_repeat' );
+		$illdy_sponsors_background_attachment = get_theme_mod( 'illdy_sponsors_background_attachment' );
+		$illdy_sponsors_background_position_y = get_theme_mod( 'illdy_sponsors_background_position_y' );
+		$illdy_sponsors_background_position_x = get_theme_mod( 'illdy_sponsors_background_position_x' );
+
+		$css = '';
+		if ( $illdy_sponsors_general_image ) {
+			$css .= '#sponsors:before {background-image: url(' . esc_url( $illdy_sponsors_general_image ) . ') !important;}';
+		}
+		if ( $illdy_sponsors_background_position_y ) {
+			$css .= '#sponsors:before {background-position-y: ' . esc_attr( $illdy_sponsors_background_position_y ) . ';}';
+		}
+		if ( $illdy_sponsors_background_position_x ) {
+			$css .= '#sponsors:before {background-position-x: ' . esc_attr( $illdy_sponsors_background_position_x ) . ';}';
+		}
+		if ( $illdy_sponsors_background_size ) {
+			$css .= '#sponsors:before {background-size: ' . esc_attr( $illdy_sponsors_background_size ) . ' !important;}';
+		}
+		if ( $illdy_sponsors_background_repeat ) {
+			$css .= '#sponsors:before {background-repeat: repeat !important;}';
+		}
+		if ( $illdy_sponsors_background_attachment ) {
+			$css .= '#sponsors:before {background-attachment: scroll !important;}';
+		}
+		if ( $illdy_sponsors_general_color ) {
+			$css .= '#sponsors:before {background-color: ' . esc_attr( $illdy_sponsors_general_color ) . ';}';
+		}
+		if ( $illdy_sponsors_title_color ) {
+			$css .= '#sponsors .section-header h3 {color: ' . esc_attr( $illdy_sponsors_title_color ) . ';}';
+		}
+		if ( $illdy_sponsors_descriptions_color ) {
+			$css .= '#sponsors .section-header .section-description {color: ' . esc_attr( $illdy_sponsors_descriptions_color ) . ';}';
 		}
 
 		return $css;

@@ -158,9 +158,9 @@ class Epsilon_Welcome_Screen{
 			add_filter( 'http_request_args', [ 'EDD_Theme_Helper', 'disable_wporg_request' ], 5, 2 );
 
 			add_action( 'update_option_' . $this->theme_slug . '_license_key', [
-					'EDD_Theme_Helper',
-					'license_activator_deactivator',
-				], 10, 2 );
+				'EDD_Theme_Helper',
+				'license_activator_deactivator',
+			], 10, 2 );
 		}
 	}
 
@@ -299,10 +299,10 @@ class Epsilon_Welcome_Screen{
 
 		$notifications = Epsilon_Notifications::get_instance();
 		$notifications->add_notice( [
-				'id'      => 'illdy_welcome_notification',
-				'type'    => 'notice epsilon-big',
-				'message' => $this->notice,
-			] );
+			'id'      => 'illdy_welcome_notification',
+			'type'    => 'notice epsilon-big',
+			'message' => $this->notice,
+		] );
 	}
 
 	/**
@@ -353,10 +353,10 @@ class Epsilon_Welcome_Screen{
 
 		if ( null === $home ) {
 			$id = wp_insert_post( [
-					'post_title'  => __( 'Homepage', 'epsilon-framework' ),
-					'post_type'   => 'page',
-					'post_status' => 'publish',
-				] );
+				'post_title'  => __( 'Homepage', 'epsilon-framework' ),
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			] );
 
 			update_option( 'page_on_front', $id );
 			update_option( 'show_on_front', 'page' );
@@ -364,10 +364,10 @@ class Epsilon_Welcome_Screen{
 
 		if ( null === $blog ) {
 			$id = wp_insert_post( [
-					'post_title'  => __( 'Blog', 'epsilon-framework' ),
-					'post_type'   => 'page',
-					'post_status' => 'publish',
-				] );
+				'post_title'  => __( 'Blog', 'epsilon-framework' ),
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			] );
 
 			update_option( 'page_for_posts', $id );
 		}
@@ -381,25 +381,25 @@ class Epsilon_Welcome_Screen{
 	public function welcome_screen_ajax_callback() {
 		if ( isset( $_POST['args'], $_POST['args']['nonce'] ) && ! wp_verify_nonce( sanitize_key( $_POST['args']['nonce'] ), 'welcome_nonce' ) ) {
 			wp_die( wp_json_encode( [
-						'status' => false,
-						'error'  => esc_html__( 'Not allowed', 'epsilon-framework' ),
-					] ) );
+				'status' => false,
+				'error'  => esc_html__( 'Not allowed', 'epsilon-framework' ),
+			] ) );
 		}
 
 		$args_action = array_map( 'sanitize_text_field', wp_unslash( $_POST['args']['action'] ) );
 
 		if ( count( $args_action ) !== 2 ) {
 			wp_die( wp_json_encode( [
-						'status' => false,
-						'error'  => esc_html__( 'Not allowed', 'epsilon-framework' ),
-					] ) );
+				'status' => false,
+				'error'  => esc_html__( 'Not allowed', 'epsilon-framework' ),
+			] ) );
 		}
 
 		if ( ! class_exists( $args_action[0] ) ) {
 			wp_die( wp_json_encode( [
-						'status' => false,
-						'error'  => esc_html__( 'Class does not exist', 'epsilon-framework' ),
-					] ) );
+				'status' => false,
+				'error'  => esc_html__( 'Class does not exist', 'epsilon-framework' ),
+			] ) );
 		}
 
 		$class  = $args_action[0];
@@ -418,15 +418,15 @@ class Epsilon_Welcome_Screen{
 
 		if ( 'ok' === $response ) {
 			wp_die( wp_json_encode( [
-						'status'  => true,
-						'message' => 'ok',
-					] ) );
+				'status'  => true,
+				'message' => 'ok',
+			] ) );
 		}
 
 		wp_die( wp_json_encode( [
-					'status'  => false,
-					'message' => 'nok',
-				] ) );
+			'status'  => false,
+			'message' => 'nok',
+		] ) );
 	}
 
 	/**
@@ -437,18 +437,18 @@ class Epsilon_Welcome_Screen{
 			wp_enqueue_style( 'welcome-screen', get_template_directory_uri() . '/inc/libraries/welcome-screen/css/welcome.css' );
 
 			wp_enqueue_script( 'welcome-screen', get_template_directory_uri() . '/inc/libraries/welcome-screen/js/welcome.js', [
-					'jquery-ui-slider',
-				], '12123' );
+				'jquery-ui-slider',
+			], '12123' );
 
 			wp_localize_script( 'welcome-screen', 'welcomeScreen', [
-					'nr_actions_required'      => absint( $this->count_actions() ),
-					'template_directory'       => esc_url( get_template_directory_uri() ),
-					'no_required_actions_text' => esc_html__( 'Hooray! There are no required actions for you right now.', 'epsilon-framework' ),
-					'ajax_nonce'               => wp_create_nonce( 'welcome_nonce' ),
-					'activating_string'        => esc_html__( 'Activating', 'epsilon-framework' ),
-					'body_class'               => 'appearance_page_' . $this->theme_slug . '-welcome',
-					'no_actions'               => esc_html__( 'Hooray! There are no required actions for you right now.', 'epsilon-framework' ),
-				] );
+				'nr_actions_required'      => absint( $this->count_actions() ),
+				'template_directory'       => esc_url( get_template_directory_uri() ),
+				'no_required_actions_text' => esc_html__( 'Hooray! There are no required actions for you right now.', 'epsilon-framework' ),
+				'ajax_nonce'               => wp_create_nonce( 'welcome_nonce' ),
+				'activating_string'        => esc_html__( 'Activating', 'epsilon-framework' ),
+				'body_class'               => 'appearance_page_' . $this->theme_slug . '-welcome',
+				'no_actions'               => esc_html__( 'Hooray! There are no required actions for you right now.', 'epsilon-framework' ),
+			] );
 		}
 	}
 
@@ -464,9 +464,9 @@ class Epsilon_Welcome_Screen{
 		}
 
 		add_theme_page( $this->theme_name, $title, 'edit_theme_options', $this->theme_slug . '-welcome', [
-				$this,
-				'render_welcome_screen',
-			] );
+			$this,
+			'render_welcome_screen',
+		] );
 	}
 
 	/**

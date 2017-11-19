@@ -330,6 +330,31 @@
 		} );
 	} );
 
+    // Show this section
+    wp.customize( 'illdy_sponsors_general_show', function( value ) {
+        value.bind( function( newval ) {
+            if( newval == false ) {
+                $( '#sponsors' ).addClass( 'customizer-display-none' );
+            } else if( newval == true ) {
+                $( '#sponsors' ).removeClass( 'customizer-display-none' );
+            }
+        } );
+    } );
+
+    // Title
+    wp.customize( 'illdy_sponsors_general_title', function( value ) {
+        value.bind( function( newval ) {
+            $( '#sponsors.front-page-section .section-header h3' ).html( newval );
+        } );
+    } );
+
+    // Entry
+    wp.customize( 'illdy_sponsors_general_entry', function( value ) {
+        value.bind( function( newval ) {
+            $( '#sponsors.front-page-section .section-header p' ).html( newval );
+        } );
+    } );
+
 	// Show this section
 	wp.customize( 'illdy_projects_general_show', function( value ) {
 		value.bind( function( newval ) {
@@ -604,8 +629,9 @@
 				'illdy_latest_news_general' : '#latest-news',
 				'illdy_counter_general' : '#counter',
 				'illdy_panel_team' : '#team',
+				'illdy_panel_sponsors' : '#sponsors',
 				'illdy_contact_us' : '#contact-us',
-				'illdy_full_width' : '#full-width',
+				'illdy_full_width' : '#full-width'
 			};
 
 			// Only on the front page.
@@ -616,7 +642,7 @@
 			// When the section is expanded, show and scroll to the content placeholders, exposing the edit links.
 			if ( true === data.expanded ) {
 				$.scrollTo( $( selectors[ data.section ] ), {
-					duration: 600,
+					duration: 600
 				});
 			}
 		});

@@ -110,9 +110,9 @@ $wp_customize->add_control( new Epsilon_Control_Slider( $wp_customize, $prefix .
 ] ) );
 
 $wp_customize->add_setting( $prefix . '_latest_news_words_number', [
-		'sanitize_callback' => 'sanitize_text_field',
-		'default'           => 20,
-	] );
+	'sanitize_callback' => 'sanitize_text_field',
+	'default'           => 20,
+] );
 
 $wp_customize->add_control( new Epsilon_Control_Slider( $wp_customize, $prefix . '_latest_news_words_number', [
 	'label'    => esc_html__( 'Number of words in post entry', 'illdy' ),

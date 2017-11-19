@@ -290,6 +290,17 @@ if ( ! function_exists( 'illdy_widgets' ) ) {
 			'after_title'   => '',
 		] );
 
+		// Sponsors Sidebar
+		register_sidebar( [
+			'name'          => __( 'Front page - Sponsors Sidebar', 'illdy' ),
+			'id'            => 'front-page-sponsors-sidebar',
+			'description'   => __( 'The widgets added in this sidebar will appear in sponsors section from front page.', 'illdy' ),
+			'before_widget' => '<div id="%1$s" class="col-sm-4 col-sm-offset-0 %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '',
+			'after_title'   => '',
+		] );
+
 		// Projects Sidebar
 		register_sidebar( [
 			'name'          => __( 'Front page - Projects Sidebar', 'illdy' ),

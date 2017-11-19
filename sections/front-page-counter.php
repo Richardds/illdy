@@ -37,17 +37,6 @@ endif;
 				<?php
 				if ( is_active_sidebar( 'front-page-counter-sidebar' ) ) :
 					dynamic_sidebar( 'front-page-counter-sidebar' );
-                elseif ( current_user_can( 'edit_theme_options' ) & defined( 'ILLDY_COMPANION' ) ) :
-					$the_widget_args = [
-						'before_widget' => '<div class="col-sm-4 widget_illdy_counter">',
-						'after_widget'  => '</div>',
-						'before_title'  => '',
-						'after_title'   => '',
-					];
-
-					the_widget( 'Illdy_Widget_Counter', 'title=' . __( 'Projects', 'illdy' ) . '&data_from=1&data_to=260&data_speed=2000&data_refresh_interval=100', $the_widget_args );
-					the_widget( 'Illdy_Widget_Counter', 'title=' . __( 'Clients', 'illdy' ) . '&data_from=1&data_to=120&data_speed=2000&data_refresh_interval=100', $the_widget_args );
-					the_widget( 'Illdy_Widget_Counter', 'title=' . __( 'Coffes', 'illdy' ) . '&data_from=1&data_to=260&data_speed=2000&data_refresh_interval=100', $the_widget_args );
 				endif;
 				?>
             </div><!--/.row-->

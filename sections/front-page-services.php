@@ -44,17 +44,6 @@ if ( current_user_can( 'edit_theme_options' ) ) {
 					<?php
 					if ( is_active_sidebar( 'front-page-services-sidebar' ) ) :
 						dynamic_sidebar( 'front-page-services-sidebar' );
-                    elseif ( current_user_can( 'edit_theme_options' ) & defined( 'ILLDY_COMPANION' ) ) :
-						$the_widget_args = [
-							'before_widget' => '<div class="col-sm-4 widget_illdy_service">',
-							'after_widget'  => '</div>',
-							'before_title'  => '',
-							'after_title'   => '',
-						];
-
-						the_widget( 'Illdy_Widget_Service', 'title=' . __( 'Web Design', 'illdy' ) . '&icon=fa-pencil&entry=' . __( 'Consectetur adipiscing elit. Praesent molestie urna hendrerit erat tincidunt tempus. Aliquam a leo risus. Fusce a metus non augue dapibus porttitor at in mauris. Pellentesque commodo...', 'illdy' ) . '&color=#f18b6d', $the_widget_args );
-						the_widget( 'Illdy_Widget_Service', 'title=' . __( 'Web Development', 'illdy' ) . '&icon=fa-code&entry=' . __( 'Consectetur adipiscing elit. Praesent molestie urna hendrerit erat tincidunt tempus. Aliquam a leo risus. Fusce a metus non augue dapibus porttitor at in mauris. Pellentesque commodo...', 'illdy' ) . '&color=#f1d204', $the_widget_args );
-						the_widget( 'Illdy_Widget_Service', 'title=' . __( 'SEO Analisys', 'illdy' ) . '&icon=fa-search&entry=' . __( 'Consectetur adipiscing elit. Praesent molestie urna hendrerit erat tincidunt tempus. Aliquam a leo risus. Fusce a metus non augue dapibus porttitor at in mauris. Pellentesque commodo...', 'illdy' ) . '&color=#6a4d8a', $the_widget_args );
 					endif;
 					?>
                 </div><!--/.row-->

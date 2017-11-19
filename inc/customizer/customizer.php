@@ -156,6 +156,12 @@ if ( ! function_exists( 'illdy_customize_register' ) ) {
 		// Team
 		require_once get_template_directory() . '/inc/customizer/panels/team.php';
 
+		// Sponsors
+		require_once get_template_directory() . '/inc/customizer/panels/sponsors.php';
+
+		// Sponsors
+		require_once get_template_directory() . '/inc/customizer/panels/sponsors.php';
+
 		// Contact Us
 		require_once get_template_directory() . '/inc/customizer/panels/contact-us.php';
 
@@ -383,6 +389,18 @@ if ( ! function_exists( 'illdy_about_general_entry' ) ) {
 	}
 }
 
+if ( ! function_exists( 'illdy_sponsors_general_title' ) ) {
+	function illdy_sponsors_general_title() {
+		return get_theme_mode( 'illdy_sponsors_general_title' );
+	}
+}
+
+if ( ! function_exists( 'illdy_sponsors_general_entry' ) ) {
+	function illdy_sponsors_general_entry() {
+		return get_theme_mode( 'illdy_sponsors_general_entry' );
+	}
+}
+
 if ( ! function_exists( 'illdy_contact_us_general_title' ) ) {
 	function illdy_contact_us_general_title() {
 		return get_theme_mode( 'illdy_contact_us_general_title' );
@@ -560,6 +578,7 @@ if ( ! function_exists( 'illdy_get_sections_position' ) ) {
 			'illdy_latest_news_general',
 			'illdy_counter_general',
 			'illdy_panel_team',
+			'illdy_panel_sponsors',
 			'illdy_contact_us',
 			'illdy_full_width',
 		];
@@ -689,6 +708,10 @@ function illdy_print_customizer_templates() {
 
     <script id="illdy-team-section" type="text/x-handlebars-template">
         {{#if illdy_team_general_image }}            #team:before { background-image: url({{illdy_team_general_image}}) !important; }        {{/if}}        {{#if illdy_team_background_position_y }}            #team:before { background-position-y: {{illdy_team_background_position_y}} !important; }        {{/if}}        {{#if illdy_team_background_position_x }}            #team:before { background-position-x: {{illdy_team_background_position_x}} !important; }        {{/if}}        {{#if illdy_team_background_attachment }}            #team:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_team_background_repeat }}            #team:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_team_background_size }}            #team:before { background-size: {{illdy_team_background_size}} !important; }        {{/if}}        {{#if illdy_team_general_color }}            #team:before { background-color: {{illdy_team_general_color}}; }        {{/if}}        {{#if  illdy_team_title_color }}            #team .section-header h3 { color: {{illdy_team_title_color}}; }        {{/if}}        {{#if  illdy_team_descriptions_color }}            #team .section-header .section-description { color: {{illdy_team_descriptions_color}}; }        {{/if}}
+    </script>
+
+    <script id="illdy-sponsors-section" type="text/x-handlebars-template">
+        {{#if illdy_sponsors_general_image }}            #sponsors:before { background-image: url({{illdy_sponsors_general_image}}) !important; }        {{/if}}        {{#if illdy_sponsors_background_position_y }}            #sponsors:before { background-position-y: {{illdy_sponsors_background_position_y}} !important; }        {{/if}}        {{#if illdy_sponsors_background_position_x }}            #sponsors:before { background-position-x: {{illdy_sponsors_background_position_x}} !important; }        {{/if}}        {{#if illdy_sponsors_background_attachment }}            #sponsors:before { background-attachment: scroll !important; }        {{/if}}        {{#if illdy_sponsors_background_repeat }}            #sponsors:before { background-repeat: repeat !important; }        {{/if}}        {{#if illdy_sponsors_background_size }}            #sponsors:before { background-size: {{illdy_sponsors_background_size}} !important; }        {{/if}}        {{#if illdy_sponsors_general_color }}            #sponsors:before { background-color: {{illdy_sponsors_general_color}}; }        {{/if}}        {{#if  illdy_sponsors_title_color }}            #sponsors .section-header h3 { color: {{illdy_sponsors_title_color}}; }        {{/if}}        {{#if  illdy_sponsors_descriptions_color }}            #sponsors .section-header .section-description { color: {{illdy_sponsors_descriptions_color}}; }        {{/if}}
     </script>
 
     <script id="illdy-testimonials-section" type="text/x-handlebars-template">

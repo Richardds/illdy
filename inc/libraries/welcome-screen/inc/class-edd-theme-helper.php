@@ -30,9 +30,9 @@ class EDD_Theme_Helper{
 	 */
 	public static function register_option( $instance ) {
 		register_setting( $instance->theme_slug . '-license', $instance->theme_slug . '_license_key', [
-				'EDD_Theme_Helper',
-				'sanitize_license',
-			] );
+			'EDD_Theme_Helper',
+			'sanitize_license',
+		] );
 	}
 
 	/**
@@ -122,10 +122,10 @@ class EDD_Theme_Helper{
 
 		// Call the custom API.
 		$response = wp_remote_post( $theme->get( 'AuthorURI' ), [
-				'timeout'   => 15,
-				'sslverify' => false,
-				'body'      => $params,
-			] );
+			'timeout'   => 15,
+			'sslverify' => false,
+			'body'      => $params,
+		] );
 
 		// Make sure the response came back okay.
 		if ( is_wp_error( $response ) ) {

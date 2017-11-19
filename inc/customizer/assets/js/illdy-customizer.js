@@ -8,7 +8,7 @@
 // });
 
 ( function( api ) {
-    var sections = [ 'illdy_jumbotron_general', 'illdy_panel_about', 'illdy_panel_projects', 'illdy_testimonials_general', 'illdy_panel_services', 'illdy_latest_news_general', 'illdy_counter_general', 'illdy_panel_team', 'illdy_contact_us', 'illdy_full_width' ];
+    var sections = [ 'illdy_jumbotron_general', 'illdy_panel_about', 'illdy_panel_projects', 'illdy_testimonials_general', 'illdy_panel_services', 'illdy_latest_news_general', 'illdy_counter_general', 'illdy_panel_team', 'illdy_panel_sponsors', 'illdy_contact_us', 'illdy_full_width' ];
 
     // Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
     jQuery.each( sections, function ( index, section ){
@@ -111,15 +111,24 @@ jQuery( document ).ready( function( $ ) {
 					/**
 					 * When we're in the homepage sections, show only specific widgets
 					 */
-				case 'customize-control-sidebars_widgets-front-page-about-sidebar':
-					$.each(widgetList, function ($k, $v) {
-						var individualId = $(this).attr('data-widget-id');
-						if ( individualId.search('illdy_skill') == -1 ) {
-							$(this).hide();
-							search.attr('disabled', true);
-						}
-					});
-					break;
+                case 'customize-control-sidebars_widgets-front-page-about-sidebar':
+                    $.each(widgetList, function ($k, $v) {
+                        var individualId = $(this).attr('data-widget-id');
+                        if ( individualId.search('illdy_skill') == -1 ) {
+                            $(this).hide();
+                            search.attr('disabled', true);
+                        }
+                    });
+                    break;
+                case 'customize-control-sidebars_widgets-front-page-sponsors-sidebar':
+                    $.each(widgetList, function ($k, $v) {
+                        var individualId = $(this).attr('data-widget-id');
+                        if ( individualId.search('illdy_sponsor') == -1 ) {
+                            $(this).hide();
+                            search.attr('disabled', true);
+                        }
+                    });
+                    break;
 				case 'customize-control-sidebars_widgets-front-page-projects-sidebar':
 					$.each(widgetList, function ($k, $v) {
 						var individualId = $(this).attr('data-widget-id');
@@ -163,7 +172,7 @@ jQuery( document ).ready( function( $ ) {
 					$.each(widgetList, function ($k, $v) {
 						search.removeAttr('disabled');
 						var individualId = $(this).attr('data-widget-id');
-						if ( individualId.search('illdy_person') != -1 || individualId.search('illdy_counter') != -1 || individualId.search('illdy_service') != -1 || individualId.search('illdy_skill') != -1 || individualId.search('illdy_project') != -1 || individualId.search('illdy_recent_posts') != -1 ) {
+						if ( individualId.search('illdy_person') != -1 || individualId.search('illdy_counter') != -1 || individualId.search('illdy_service') != -1 || individualId.search('illdy_skill') != -1 || individualId.search('illdy_sponsor') != -1 || individualId.search('illdy_project') != -1 || individualId.search('illdy_recent_posts') != -1 ) {
 							$(this).hide();
 						} else {
 							$(this).show();
@@ -287,6 +296,17 @@ jQuery( document ).ready( function( $ ) {
             'illdy_team_background_position_y',
             'illdy_team_background_position_x'
         ],
+        'sponsors' : [
+            'illdy_sponsors_title_color',
+            'illdy_sponsors_descriptions_color',
+            'illdy_sponsors_general_color',
+            'illdy_sponsors_general_image',
+            'illdy_sponsors_background_size',
+            'illdy_sponsors_background_repeat',
+            'illdy_sponsors_background_attachment',
+            'illdy_sponsors_background_position_y',
+            'illdy_sponsors_background_position_x'
+        ]
 
     };
 
@@ -366,6 +386,20 @@ jQuery( document ).ready( function( $ ) {
         wp.customize.previewer.send('update-section-css', liveObj);
     }
 
+    function update_sponsors_css(){
+        var liveObj = {
+            'action' : 'illdy_generate_section_css',
+            'illdy_section' : 'sponsors',
+            'values' : {}
+        };
+
+        _.each( sections.sponsors, function( setting ){
+            liveObj.values[setting] = wp.customize(setting)();
+        });
+
+        wp.customize.previewer.send('update-section-css', liveObj);
+    }
+
     function update_projects_css(){
         var liveObj = {
             'action' : 'illdy_generate_section_css',
@@ -437,6 +471,8 @@ jQuery( document ).ready( function( $ ) {
                                 setting.bind(update_fullwidth_css);
                             }else if ( section_ID == 'about' ) {
                                 setting.bind(update_about_css);
+                            }else if ( section_ID == 'sponsors' ) {
+                                setting.bind(update_sponsors_css);
                             }else if ( section_ID == 'projects' ) {
                                 setting.bind(update_projects_css);
                             }else if ( section_ID == 'services' ) {

@@ -432,6 +432,12 @@ a:hover {
 	text-align: center
 }
 
+#sponsors {
+	width: 100%;
+	padding: 65px 0;
+	text-align: center
+}
+
 #static-page-content {
 	background: #fff
 }
@@ -441,6 +447,22 @@ a:hover {
 }
 
 #about .section-header h3 {
+	margin-bottom: 55px
+}
+
+#sponsors .section-header {
+	margin-bottom: 0;
+}
+
+#sponsors .section-header h3 {
+	margin-bottom: 55px
+}
+
+#sponsors img.sponsor {
+	margin-bottom: 55px
+}
+
+#sponsors img.sponsor:hover {
 	margin-bottom: 55px
 }
 
@@ -2876,6 +2898,7 @@ p.mb32 {
 }
 
 #about:before,
+#sponsors:before,
 #counter:before,
 #full-width:before,
 #projects:before,

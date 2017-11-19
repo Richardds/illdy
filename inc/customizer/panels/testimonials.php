@@ -7,11 +7,11 @@ $panel_id = $prefix . '_testimonials_general';
 /******************* General *******************/
 /***********************************************/
 $wp_customize->add_section( $prefix . '_testimonials_general', [
-		'title'       => __( 'Testimonials Section', 'illdy' ),
-		'description' => __( 'Control various options for testimonials section from front page.', 'illdy' ),
-		'priority'    => illdy_get_section_position( $prefix . '_testimonials_general' ),
-		'panel'       => 'illdy_frontpage_panel',
-	] );
+	'title'       => __( 'Testimonials Section', 'illdy' ),
+	'description' => __( 'Control various options for testimonials section from front page.', 'illdy' ),
+	'priority'    => illdy_get_section_position( $prefix . '_testimonials_general' ),
+	'panel'       => 'illdy_frontpage_panel',
+] );
 
 // Show this section
 $wp_customize->add_setting( $prefix . '_testimonials_general_show', [
@@ -43,9 +43,9 @@ $wp_customize->selective_refresh->add_partial( $prefix . '_testimonials_general_
 ] );
 
 $wp_customize->add_setting( $prefix . '_testimonial_widget_button', [
-		'transport'         => 'postMessage',
-		'sanitize_callback' => 'wp_kses_post',
-	] );
+	'transport'         => 'postMessage',
+	'sanitize_callback' => 'wp_kses_post',
+] );
 $wp_customize->add_control( new Epsilon_Control_Button( $wp_customize, $prefix . '_testimonial_widget_button', [
 	'text'       => __( 'Add & Edit Testimonials', 'illdy' ),
 	'section_id' => 'sidebar-widgets-front-page-testimonials-sidebar',
