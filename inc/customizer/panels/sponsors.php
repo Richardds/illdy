@@ -84,6 +84,18 @@ $wp_customize->selective_refresh->add_partial( $prefix . '_sponsors_general_entr
 	'render_callback' => $prefix . '_sponsors_general_entry',
 ] );
 
+$wp_customize->add_setting( $prefix . '_sponsors_widget_button', [
+	'transport'         => 'postMessage',
+	'sanitize_callback' => 'wp_kses_post',
+] );
+$wp_customize->add_control( new Epsilon_Control_Button( $wp_customize, $prefix . '_sponsors_widget_button', [
+	'text'       => __( 'Add & Edit sponsors', 'illdy' ),
+	'section_id' => 'sidebar-widgets-front-page-sponsors-sidebar',
+	'icon'       => 'dashicons-plus',
+	'section'    => $panel_id,
+	'priority'   => 5,
+] ) );
+
 $wp_customize->add_setting( $prefix . '_sponsors_tab', [
 	'transport'         => 'postMessage',
 	'sanitize_callback' => 'wp_kses_post',
