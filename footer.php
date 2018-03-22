@@ -18,7 +18,10 @@ if ( current_user_can( 'edit_theme_options' ) ) {
     <div class="bottom-footer">
         <div class="container">
             <p class="copyright">
-                <span class="bottom-copyright" data-customizer="copyright-credit"><?php echo illdy_sanitize_html( $footer_copyright ); ?></span>
+                <span class="bottom-copyright" data-customizer="copyright-credit">
+                    <?php echo illdy_sanitize_html( $footer_copyright ); ?><br>
+                    Theme <a href="https://colorlib.com/wp/themes/illdy/" target="_blank">Illdy</a> customized by <a href="mailto:richard.boldis@richardds.com">Richard Boldiš</a>
+                </span>
             </p>
         </div>
     </div>
